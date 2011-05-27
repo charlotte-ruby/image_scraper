@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John McAliley"]
-  s.date = %q{2011-05-26}
+  s.date = %q{2011-05-27}
   s.description = %q{Simple utility to pull image urls from web page}
   s.email = %q{john.mcaliley@gmail.com}
   s.extra_rdoc_files = [
