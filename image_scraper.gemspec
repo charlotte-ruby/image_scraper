@@ -19,9 +19,12 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
+    "README.md",
     "Rakefile",
     "VERSION",
+    "image_scraper.gemspec",
     "lib/image_scraper.rb",
     "test/helper.rb",
     "test/test_image_scraper.rb"
