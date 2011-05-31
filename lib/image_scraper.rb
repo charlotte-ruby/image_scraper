@@ -30,15 +30,15 @@ module ImageScraper
   def self.stylesheet_images(doc)
     find_stylesheets(doc).each do |stylesheet|
       parser = CssParser::Parser.new
-      parser.load_uri!(stylesheet)
+      p parser.load_uri!(stylesheet)
+      
     end
   end
   
   def self.find_stylesheets(doc)
     stylesheets = []
-    doc.xpath('//link').each do |stylesheet|
-      p stylesheet.inspect
-      #stylesheets << stylesheet
+    doc.xpath('//link[@rel="stylesheet"]').each do |stylesheet|
+      stylesheets << stylesheet['href']
     end
     stylesheets
   end
