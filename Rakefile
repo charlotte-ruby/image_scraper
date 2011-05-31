@@ -20,6 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "john.mcaliley@gmail.com"
   gem.authors = ["John McAliley"]
   gem.add_dependency "nokogiri"
+  gem.add_dependency "css_parser"  
 end
 Jeweler::RubygemsDotOrgTasks.new
 
