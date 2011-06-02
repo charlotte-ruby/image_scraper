@@ -26,7 +26,7 @@ You can also pass an options hash to the client when you initialize it:
     # :include_css_images - If there are stylesheets on the page, it will pull images out of the stylesheet.  For example: background: url(/images/some-image.png).
     # :include_css_data_images - Will include data images from CSS.  For example: data:image/gif;base64,R0lGODlhEAAOALMAAOazToeH............
     
-Get the images on the page:
+Get the images from the url specified when you initialized the client:
 
     image_scraper.image_urls
 
