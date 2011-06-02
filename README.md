@@ -14,17 +14,23 @@ Install w/ Bundler
     
 ## USAGE
 
-Pull all the image URLs from a specified URL and convert all images URLs to absolute paths
+Initialize the image scraper client
 
-    ImageScraper.image_urls("http://www.rubygems.org")
+    image_scraper = ImageScraper::Client.new("http://www.rubygems.org")
 
-Pull all images URLs from specified URL and use relative URLs
+You can also pass an options hash to the client when you initialize it:
 
-    ImageScraper.image_urls("http://www.rubygems.org",false)
+    image_scraper = ImageScraper::Client.new("http://www.rubygems.org", options)
+    # OPTIONS - If you don't pass the option, it will default to true
+    # :convert_to_absolute_url - If there are relative image URLS, it will convert them to absolute URLS.
+    # :include_css_images - If there are stylesheets on the page, it will pull images out of the stylesheet.  For example: background: url(/images/some-image.png).
+    # :include_css_data_images - Will include data images from CSS.  For example: data:image/gif;base64,R0lGODlhEAAOALMAAOazToeH............
+    
+Get the images on the page:
 
-## TODO
+    image_scraper.image_urls
 
-1. Parse CSS files for images
+This will return an array of strings.
 
 ## Contributing to image_scraper
  
