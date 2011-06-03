@@ -1,7 +1,7 @@
 module ImageScraper
   module Util
     def self.absolute_url(url,asset=nil)
-      return domain(url) + path(url) if asset.nil? and asset.include("://")
+      return url if asset.nil?
       return asset if asset.include?("://")
       return domain(url)+asset if asset[0]=="/"
       return domain(url) =~ /\/$/  ? domain(url)+asset : domain(url)+"/"+asset

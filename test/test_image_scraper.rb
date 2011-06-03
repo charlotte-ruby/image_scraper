@@ -38,6 +38,8 @@ class TestImageScraper < Test::Unit::TestCase
     assert_equal "http://www.test.com/images/image.gif", ImageScraper::Util.absolute_url("http://www.test.com/","/images/image.gif")
     assert_equal "http://www.test.com/images/image.gif", ImageScraper::Util.absolute_url("http://www.test.com/","images/image.gif")
     assert_equal "http://www.test.com/images/image.gif", ImageScraper::Util.absolute_url("http://www.test.com/","/images/image.gif")
+    assert_equal "http://www.test.com/", ImageScraper::Util.absolute_url("http://www.test.com/")
+    assert_equal "http://www.test.com/123/test.html", ImageScraper::Util.absolute_url("http://www.test.com/123/test.html")
   end
   
   should "return images from a stylesheet" do
