@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{image_scraper}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John McAliley"]
@@ -19,13 +19,15 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
-    "Gemfile.lock",
     "LICENSE.txt",
     "README.md",
     "Rakefile",
     "VERSION",
     "image_scraper.gemspec",
-    "lib/image_scraper.rb"
+    "lib/image_scraper.rb",
+    "lib/image_scraper/client.rb",
+    "lib/image_scraper/railtie.rb",
+    "lib/image_scraper/util.rb"
   ]
   s.homepage = %q{http://github.com/charlotte-ruby/image_scraper}
   s.licenses = ["MIT"]
