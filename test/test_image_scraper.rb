@@ -44,4 +44,17 @@ class TestImageScraper < Test::Unit::TestCase
     scraper = ImageScraper::Client.new("http://local.couponshack.com")
     assert scraper.stylesheet_images.include? ("http://local.couponshack.com/images/bg.png")
   end
+  
+  should "strip quotes from a url" do
+    assert_equal "/images/test.png", ImageScraper::Util.strip_quotes("'/images/test.png'")
+    assert_equal "http://www.somsite.com/images/test.png", ImageScraper::Util.strip_quotes("'http://www.somsite.com/images/test.png'")
+    assert_equal "/images/test.png", ImageScraper::Util.strip_quotes('"/images/test.png"')
+  end
+  
+  should "return domain section from a url" do
+    assert_equal "http://ug.ly", ImageScraper::Util.domain("http://ug.ly/what/is/this.html")
+    assert_equal "http://ug.ly", ImageScraper::Util.domain("http://ug.ly/what/is/this/")
+    assert_equal "http://ug.ly", ImageScraper::Util.domain("http://ug.ly/what")
+    assert_equal "http://www.ug.ly", ImageScraper::Util.domain("http://www.ug.ly/what/is/this/")
+  end
 end

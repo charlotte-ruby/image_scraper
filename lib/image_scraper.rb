@@ -1,4 +1,3 @@
-require 'pp'
 require 'rails'
 require 'open-uri'
 require 'nokogiri'

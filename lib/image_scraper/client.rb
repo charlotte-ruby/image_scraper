@@ -34,10 +34,12 @@ module ImageScraper
         css = file.string rescue IO.read(file)
         
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
+          image_url = image_url[0]
           if image_url.include?("data:image") and @include_css_data_images
-            image_url[0]
+            image_url
           else
-            @convert_to_absolute_url ? ImageScraper::Util.absolute_url(url,image_url[0]) : image_url
+            image_url = ImageScraper::Util.strip_quotes(image_url)
+            @convert_to_absolute_url ? ImageScraper::Util.absolute_url(url,image_url) : image_url
           end
         end
       end

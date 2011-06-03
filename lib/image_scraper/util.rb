@@ -16,5 +16,9 @@ module ImageScraper
       uri = URI.parse(url)
       uri.path
     end
+    
+    def self.strip_quotes(image_url)
+      image_url.gsub("'","").gsub('"','')
+    end
   end
 end
