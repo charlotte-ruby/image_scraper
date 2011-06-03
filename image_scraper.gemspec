@@ -25,10 +25,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "image_scraper.gemspec",
-    "lib/image_scraper.rb",
-    "test/helper.rb",
-    "test/resources/stylesheet_test.html",
-    "test/test_image_scraper.rb"
+    "lib/image_scraper.rb"
   ]
   s.homepage = %q{http://github.com/charlotte-ruby/image_scraper}
   s.licenses = ["MIT"]
