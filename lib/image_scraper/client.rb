@@ -8,7 +8,8 @@ module ImageScraper
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
-      @doc = Nokogiri::HTML(open url)
+      html = open(url).read
+      @doc = Nokogiri::HTML(html)
     end
   
     def image_urls

@@ -7,8 +7,8 @@ class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with absolute paths" do
     images = ["http://upload.wikimedia.org/wikipedia/en/thumb/2/24/Lenna.png/200px-Lenna.png",
      "http://bits.wikimedia.org/skins-1.17/common/images/magnify-clip.png",
-     "http://bits.wikimedia.org/skins-1.17/vector/images/search-ltr.png?301-2",
-     "http://en.wikipedia.org/images/wikimedia-button.png",
+     "http://bits.wikimedia.org/skins-1.17/vector/images/search-ltr.png?301-3",
+     "http://bits.wikimedia.org/images/wikimedia-button.png",
      "http://bits.wikimedia.org/skins-1.17/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:include_css_images=>false)
     assert_equal images, scraper.image_urls
@@ -17,8 +17,8 @@ class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with relative paths" do
     images = ["http://upload.wikimedia.org/wikipedia/en/thumb/2/24/Lenna.png/200px-Lenna.png",
      "http://bits.wikimedia.org/skins-1.17/common/images/magnify-clip.png",
-     "http://bits.wikimedia.org/skins-1.17/vector/images/search-ltr.png?301-2",
-     "/images/wikimedia-button.png",
+     "http://bits.wikimedia.org/skins-1.17/vector/images/search-ltr.png?301-3",
+     "http://bits.wikimedia.org/images/wikimedia-button.png",
      "http://bits.wikimedia.org/skins-1.17/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:convert_to_absolute_url=>false,:include_css_images=>false)
     assert_equal images, scraper.image_urls
