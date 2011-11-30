@@ -3,6 +3,8 @@ require 'helper'
 
 
 #TODO: these tests will not work forever.  Try to test against a static web page instead of external URLs
+# Consider using https://raw.github.com/charlotte-ruby/image_scraper urls
+
 class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with absolute paths" do
     images = ["http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
@@ -68,4 +70,28 @@ class TestImageScraper < Test::Unit::TestCase
     assert_equal [], scraper.stylesheet_images
     assert_equal [], scraper.page_images
   end
+
+  should "Handle a URL with unescaped spaces" do
+    images = ["http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
+     "http://en.wikipedia.org//bits.wikimedia.org/images/wikimedia-button.png",
+     "http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
+    scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard test image",:include_css_images=>false)
+    assert_equal images, scraper.image_urls
+  end
+  
+  should "Handle a page image with an unescaped url" do
+    scraper = ImageScraper::Client.new ''
+    scraper.doc = Nokogiri::HTML("<img src='http://test.com/unescaped path'")
+    assert_equal ['http://test.com/unescaped%20path'], scraper.page_images
+  end 
+  
+  should "Handle a stylesheet with an unescaped url" do
+    scraper = ImageScraper::Client.new ''
+    scraper.doc = Nokogiri::HTML("<link rel='stylesheet' href='http://test.com/unescaped path.css'")
+    assert_equal ['http://test.com/unescaped%20path.css'], scraper.stylesheets
+  end 
+  
+  should "Handle a stylesheet image with an unescaped url" do
+
+  end 
 end
