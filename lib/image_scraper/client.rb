@@ -41,7 +41,7 @@ module ImageScraper
             image_url
           else
             image_url = ImageScraper::Util.strip_quotes(image_url)
-            @convert_to_absolute_url ? ImageScraper::Util.absolute_url(url,image_url) : image_url
+            @convert_to_absolute_url ? ImageScraper::Util.absolute_url(stylesheet, image_url) : image_url
           end
         end
       end
@@ -51,7 +51,7 @@ module ImageScraper
     def stylesheets
       return [] if doc.blank?
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        URI.escape ImageScraper::Util.absolute_url(url,stylesheet['href'])
+        ImageScraper::Util.absolute_url url, URI.escape(stylesheet['href'])
       end
     end
   end

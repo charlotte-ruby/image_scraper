@@ -7,9 +7,9 @@ require 'helper'
 
 class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with absolute paths" do
-    images = ["http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
-     "http://en.wikipedia.org//bits.wikimedia.org/images/wikimedia-button.png",
-     "http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
+    images = ["http://bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
+     "http://bits.wikimedia.org/images/wikimedia-button.png",
+     "http://bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:include_css_images=>false)
     assert_equal images, scraper.image_urls
   end
@@ -72,27 +72,33 @@ class TestImageScraper < Test::Unit::TestCase
   end
 
   should "Handle a URL with unescaped spaces" do
-    images = ["http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
-     "http://en.wikipedia.org//bits.wikimedia.org/images/wikimedia-button.png",
-     "http://en.wikipedia.org//bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
+    images = ["http://bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
+     "http://bits.wikimedia.org/images/wikimedia-button.png",
+     "http://bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard test image",:include_css_images=>false)
     assert_equal images, scraper.image_urls
   end
   
   should "Handle a page image with an unescaped url" do
     scraper = ImageScraper::Client.new ''
-    scraper.doc = Nokogiri::HTML("<img src='http://test.com/unescaped path'")
+    scraper.doc = Nokogiri::HTML("<img src='http://test.com/unescaped path'>")
     assert_equal ['http://test.com/unescaped%20path'], scraper.page_images
   end 
   
   should "Handle a stylesheet with an unescaped url" do
     scraper = ImageScraper::Client.new ''
-    scraper.doc = Nokogiri::HTML("<link rel='stylesheet' href='http://test.com/unescaped path.css'")
+    scraper.url = 'http://test.com'
+    scraper.doc = Nokogiri::HTML("<link rel='stylesheet' href='http://test.com/unescaped path.css'>")
     assert_equal ['http://test.com/unescaped%20path.css'], scraper.stylesheets
   end 
   
   should "Handle a stylesheet image with an unescaped url" do
     scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html', :include_css_images => true
     assert_equal ['https://raw.github.com/charlotte-ruby/image_scraper/master/some%20image.png'], scraper.stylesheet_images
+  end 
+  
+  should "Handle a stylesheet image with a relative url" do
+    scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/relative_image_url.html', :include_css_images => true
+    assert_equal ['https://raw.github.com/charlotte-ruby/image_scraper/master/test/images/some_image.png'], scraper.stylesheet_images
   end 
 end

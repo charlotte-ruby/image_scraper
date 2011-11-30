@@ -1,10 +1,18 @@
 module ImageScraper
   module Util
     def self.absolute_url(url,asset=nil)
-      return url if asset.nil?
-      return asset if asset.include?("://")
-      return domain(url)+asset if asset[0]=="/"
-      return domain(url) =~ /\/$/  ? domain(url)+asset : domain(url)+"/"+asset
+      # TODO - what happens when an index redirect occurs?
+      # Example: 'http://example.com/about' specified as url
+      #          'style.css' specified as asset
+      #          url redirects to 'http://example.com/about/'
+      #          and serves http://example.com/about/index.html
+      #          which then links to the relative asset path 'style.css'
+      #          based on original url (http://example.com/about), 
+      #          self.absolute_url gives
+      #          'http://example.com/style.css
+      #          but should get:
+      #          'http://example.com/about/style.css
+      URI.parse(url).merge(URI.parse asset.to_s).to_s
     end
     
     def self.domain(url)
