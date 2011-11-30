@@ -8,8 +8,8 @@ module ImageScraper
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
-      html = open(url).read
-      @doc = Nokogiri::HTML(html)
+      html = open(url).read rescue nil
+      @doc = html ? Nokogiri::HTML(html) : nil
     end
   
     def image_urls
@@ -20,6 +20,7 @@ module ImageScraper
     
     def page_images
       urls = []
+      return urls if doc.blank?
       doc.xpath("//img").each do |img|
         image = URI.escape(img["src"])
         image = ImageScraper::Util.absolute_url(url,image) if convert_to_absolute_url
@@ -48,6 +49,7 @@ module ImageScraper
     end
     
     def stylesheets
+      return [] if doc.blank?
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
         URI.escape ImageScraper::Util.absolute_url(url,stylesheet['href'])
       end
