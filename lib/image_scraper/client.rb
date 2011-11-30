@@ -4,7 +4,7 @@ module ImageScraper
     
     def initialize(url,options={})
       options.reverse_merge!(:convert_to_absolute_url=>true,:include_css_images=>true, :include_css_data_images=>false)
-      @url = url
+      @url = URI.escape(url)
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
@@ -21,7 +21,7 @@ module ImageScraper
     def page_images
       urls = []
       doc.xpath("//img").each do |img|
-        image = img["src"]
+        image = URI.escape(img["src"])
         image = ImageScraper::Util.absolute_url(url,image) if convert_to_absolute_url
         urls << image
       end
@@ -35,7 +35,7 @@ module ImageScraper
         css = file.string rescue IO.read(file)
         
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
-          image_url = image_url[0]
+          image_url = URI.escape image_url[0]
           if image_url.include?("data:image") and @include_css_data_images
             image_url
           else
@@ -49,7 +49,7 @@ module ImageScraper
     
     def stylesheets
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        ImageScraper::Util.absolute_url(url,stylesheet['href'])
+        URI.escape ImageScraper::Util.absolute_url(url,stylesheet['href'])
       end
     end
   end
