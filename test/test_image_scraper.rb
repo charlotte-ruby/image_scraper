@@ -92,6 +92,7 @@ class TestImageScraper < Test::Unit::TestCase
   end 
   
   should "Handle a stylesheet image with an unescaped url" do
-
+    scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html', :include_css_images => true
+    assert_equal ['https://raw.github.com/charlotte-ruby/image_scraper/master/some%20image.png'], scraper.stylesheet_images
   end 
 end
