@@ -22,6 +22,7 @@ module ImageScraper
       urls = []
       return urls if doc.blank?
       doc.xpath("//img").each do |img|
+        next if img["src"].blank?
         image = URI.escape(img["src"])
         image = ImageScraper::Util.absolute_url(url,image) if convert_to_absolute_url
         urls << image
