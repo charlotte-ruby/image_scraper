@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{image_scraper}
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John McAliley"]
-  s.date = %q{2011-12-22}
+  s.date = %q{2012-01-02}
   s.description = %q{Simple utility to pull image urls from web page}
   s.email = %q{john.mcaliley@gmail.com}
   s.extra_rdoc_files = [
