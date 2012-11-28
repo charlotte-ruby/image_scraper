@@ -33,8 +33,8 @@ module ImageScraper
     def stylesheet_images
       images = []
       stylesheets.each do |stylesheet|
-        file = open(stylesheet)
-        css = file.string rescue IO.read(file)
+        file = open(stylesheet) rescue next
+        css = file.string rescue IO.read(file) rescue next
 
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
           image_url = URI.escape image_url[0]
