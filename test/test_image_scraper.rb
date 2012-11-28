@@ -112,4 +112,11 @@ class TestImageScraper < Test::Unit::TestCase
     scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/relative_image_url.html', :include_css_images => true
     assert_equal ['https://raw.github.com/charlotte-ruby/image_scraper/master/test/images/some_image.png'], scraper.stylesheet_images
   end
+
+  should "Handle cases where a stylesheet returns a 404" do
+    scraper = ImageScraper::Client.new ''
+    scraper.url = 'http://google.com'
+    scraper.doc = Nokogiri::HTML("<link rel='stylesheet' href='http://google.com/does_not_exist.css'>")
+    assert_equal [], scraper.stylesheet_images
+  end
 end
