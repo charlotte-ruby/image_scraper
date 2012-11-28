@@ -7,9 +7,11 @@ require 'helper'
 
 class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with absolute paths" do
-    images = ["http://bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
-     "http://bits.wikimedia.org/images/wikimedia-button.png",
-     "http://bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
+    images = ["http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
+              "http://bits.wikimedia.org/static-1.21wmf4/skins/common/images/magnify-clip.png",
+              "http://bits.wikimedia.org/static-1.21wmf4/skins/vector/images/search-ltr.png?303-4",
+              "http://bits.wikimedia.org/images/wikimedia-button.png",
+              "http://bits.wikimedia.org/static-1.21wmf4/skins/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:include_css_images=>false)
     assert_equal images, scraper.image_urls
   end
@@ -23,17 +25,20 @@ class TestImageScraper < Test::Unit::TestCase
   end
 
   should "return list of all image urls on a web page with relative paths" do
-    images = ["//bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
-     "//bits.wikimedia.org/images/wikimedia-button.png",
-     "//bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
+    images = ["//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
+              "//bits.wikimedia.org/static-1.21wmf4/skins/common/images/magnify-clip.png",
+              "//bits.wikimedia.org/static-1.21wmf4/skins/vector/images/search-ltr.png?303-4",
+              "//bits.wikimedia.org/images/wikimedia-button.png",
+              "//bits.wikimedia.org/static-1.21wmf4/skins/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:convert_to_absolute_url=>false,:include_css_images=>false)
     assert_equal images, scraper.image_urls
   end
 
   should "return list of stylesheets contained in html page (relative path)" do
-    doc = Nokogiri::HTML(IO.read(File.dirname(__FILE__)+"/resources/stylesheet_test.html"))
-    domain = "http://test.com"
-    assert_equal ["http://test.com/phoenix/testcentral.css","http://test.com/engine1/style.css"], ImageScraper::Client.new("http://test.com").stylesheets
+    scraper = ImageScraper::Client.new ""
+    scraper.doc = Nokogiri::HTML(IO.read(File.dirname(__FILE__)+"/resources/stylesheet_test.html"))
+    scraper.url = "http://test.com"
+    assert_equal ["http://test.com/css/master.css", "http://test.com/css/master2.css"], scraper.stylesheets
   end
 
   should "return proper absolute url for a page and asset" do
@@ -49,8 +54,8 @@ class TestImageScraper < Test::Unit::TestCase
   end
 
   should "return images from a stylesheet" do
-    scraper = ImageScraper::Client.new("http://couponshack.com")
-    assert scraper.stylesheet_images.include? ("http://couponshack.com/images/bg.jpg")
+    scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html', :include_css_images => true
+    assert scraper.stylesheet_images.include? 'https://raw.github.com/charlotte-ruby/image_scraper/master/some%20image.png'
   end
 
   should "strip quotes from a url" do
@@ -80,10 +85,8 @@ class TestImageScraper < Test::Unit::TestCase
   end
 
   should "Handle a URL with unescaped spaces" do
-    images = ["http://bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4",
-     "http://bits.wikimedia.org/images/wikimedia-button.png",
-     "http://bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png"]
-    scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard test image",:include_css_images=>false)
+    images = ["https://raw.github.com/syoder/image_scraper/stylesheet_fix/test/resources/image1.png"]
+    scraper = ImageScraper::Client.new 'https://raw.github.com/syoder/image_scraper/stylesheet_fix/test/resources/space in url.html', :include_css_images => false
     assert_equal images, scraper.image_urls
   end
 
