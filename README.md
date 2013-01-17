@@ -1,6 +1,6 @@
 # image_scraper
 
-[![Build Status](https://secure.travis-ci.org/charlotte-ruby/image_scraper.png)](http://travis-ci.org/charlotte-ruby/image_scraper)
+[![Build Status](https://travis-ci.org/charlotte-ruby/image_scraper.png?branch=master)](http://travis-ci.org/charlotte-ruby/image_scraper)
 
 Simple utility that pulls image URLS from web page
 
