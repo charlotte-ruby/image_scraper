@@ -1,3 +1,4 @@
+require 'cgi'
 module ImageScraper
   class Client
     attr_accessor :url, :convert_to_absolute_url, :include_css_images, :include_css_data_images, :doc
@@ -24,6 +25,7 @@ module ImageScraper
       doc.xpath("//img").each do |img|
         next if img["src"].blank?
         image = URI.escape(img["src"].strip)
+        image = image.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
         image = ImageScraper::Util.absolute_url(url,image) if convert_to_absolute_url
         urls << image
       end
@@ -38,6 +40,7 @@ module ImageScraper
 
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
           image_url = URI.escape image_url[0]
+          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
           if image_url.include?("data:image") and @include_css_data_images
             image_url
           else
