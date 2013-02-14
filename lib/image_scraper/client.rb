@@ -24,6 +24,7 @@ module ImageScraper
       doc.xpath("//img").each do |img|
         next if img["src"].blank?
         image = URI.escape(img["src"].strip)
+        image = image.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
         image = ImageScraper::Util.absolute_url(url,image) if convert_to_absolute_url
         urls << image
       end
