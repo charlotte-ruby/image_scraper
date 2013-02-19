@@ -8,10 +8,10 @@ require 'helper'
 class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with absolute paths" do
     images = ["http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
-              "http://bits.wikimedia.org/static-1.21wmf5/skins/common/images/magnify-clip.png",
-              "http://bits.wikimedia.org/static-1.21wmf5/skins/vector/images/search-ltr.png?303-4",
+              "http://bits.wikimedia.org/static-1.21wmf9/skins/common/images/magnify-clip.png",
+              "http://bits.wikimedia.org/static-1.21wmf9/skins/vector/images/search-ltr.png?303-4",
               "http://bits.wikimedia.org/images/wikimedia-button.png",
-              "http://bits.wikimedia.org/static-1.21wmf5/skins/common/images/poweredby_mediawiki_88x31.png"]
+              "http://bits.wikimedia.org/static-1.21wmf9/skins/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:include_css_images=>false)
 
     assert_equal images.size, scraper.image_urls.size
@@ -30,10 +30,10 @@ class TestImageScraper < Test::Unit::TestCase
 
   should "return list of all image urls on a web page with relative paths" do
     images = ["//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
-              "//bits.wikimedia.org/static-1.21wmf5/skins/common/images/magnify-clip.png",
-              "//bits.wikimedia.org/static-1.21wmf5/skins/vector/images/search-ltr.png?303-4",
+              "//bits.wikimedia.org/static-1.21wmf9/skins/common/images/magnify-clip.png",
+              "//bits.wikimedia.org/static-1.21wmf9/skins/vector/images/search-ltr.png?303-4",
               "//bits.wikimedia.org/images/wikimedia-button.png",
-              "//bits.wikimedia.org/static-1.21wmf5/skins/common/images/poweredby_mediawiki_88x31.png"]
+              "//bits.wikimedia.org/static-1.21wmf9/skins/common/images/poweredby_mediawiki_88x31.png"]
     scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:convert_to_absolute_url=>false,:include_css_images=>false)
     
     assert_equal images.size, scraper.image_urls.size
@@ -125,5 +125,12 @@ class TestImageScraper < Test::Unit::TestCase
     scraper.url = 'http://google.com'
     scraper.doc = Nokogiri::HTML("<link rel='stylesheet' href='http://google.com/does_not_exist.css'>")
     assert_equal [], scraper.stylesheet_images
+  end
+
+  should "not crash when it encounters image URLs that include square brackets" do
+    scraper = ImageScraper::Client.new ''
+    scraper.url = 'http://google.com'
+    scraper.doc = Nokogiri::HTML("<img src='image[1].jpg' >")
+    assert_equal ["http://google.com/image%5B1%5D.jpg"], scraper.page_images
   end
 end
