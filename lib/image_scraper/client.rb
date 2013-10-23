@@ -39,12 +39,11 @@ module ImageScraper
         css = file.string rescue IO.read(file) rescue next
 
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
-          image_url = URI.escape image_url[0]
+          image_url = URI.escape ImageScraper::Util.cleanup_url(image_url[0])
           image_url = image_url.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
           if image_url.include?("data:image") and @include_css_data_images
             image_url
           else
-            image_url = ImageScraper::Util.strip_quotes(image_url)
             @convert_to_absolute_url ? ImageScraper::Util.absolute_url(stylesheet, image_url) : image_url
           end
         end
@@ -55,7 +54,7 @@ module ImageScraper
     def stylesheets
       return [] if doc.blank?
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        ImageScraper::Util.absolute_url url, URI.escape(stylesheet['href'])
+        ImageScraper::Util.absolute_url url, URI.escape(ImageScraper::Util.cleanup_url(stylesheet['href']))
       end
     end
   end

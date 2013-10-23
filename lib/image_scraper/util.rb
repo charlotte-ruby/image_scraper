@@ -26,7 +26,15 @@ module ImageScraper
     end
     
     def self.strip_quotes(image_url)
-      image_url.sub(/^%22/,'').sub(/%22$/,'').sub(/^%20/,'').sub(/%20$/,'').gsub("'","").gsub('"','')
+      image_url.gsub("'","").gsub('"','')
+    end
+
+    def self.chomp(image_url)
+      image_url.gsub(/\s/,'')
+    end
+
+    def self.cleanup_url(image_url)
+      ImageScraper::Util.chomp(ImageScraper::Util.strip_quotes(image_url))
     end
   end
 end
