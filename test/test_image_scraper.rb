@@ -6,6 +6,10 @@ require 'helper'
 # Consider using https://raw.github.com/charlotte-ruby/image_scraper urls
 
 class TestImageScraper < Test::Unit::TestCase
+  should "parse urls even with escaped (%22) double quotes in them" do
+    scraper = ImageScraper::Client.new "http://newscorp.com/careers/"
+  end
+
   should "return list of all image urls on a web page with absolute paths" do
     images = ["http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
               "http://bits.wikimedia.org/static-1.21wmf9/skins/common/images/magnify-clip.png",
