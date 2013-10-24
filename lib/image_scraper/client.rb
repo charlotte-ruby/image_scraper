@@ -10,7 +10,7 @@ module ImageScraper
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
       html = open(@url).read rescue nil
-      @doc = html ? Nokogiri::HTML(html) : nil
+      @doc = html ? Nokogiri::HTML(html, nil, 'UTF-8') : nil
     end
 
     def image_urls
