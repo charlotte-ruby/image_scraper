@@ -37,7 +37,7 @@ module ImageScraper
       stylesheets.each do |stylesheet|
         file = open(stylesheet) rescue next
         css = file.string rescue IO.read(file) rescue next
-
+        css = css.unpack("C*").pack("U*")
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
           image_url = URI.escape ImageScraper::Util.cleanup_url(image_url[0])
           image_url = image_url.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
@@ -48,14 +48,14 @@ module ImageScraper
           end
         end
       end
-      images
+      images.compact
     end
 
     def stylesheets
       return [] if doc.blank?
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        ImageScraper::Util.absolute_url url, URI.escape(ImageScraper::Util.cleanup_url(stylesheet['href']))
-      end
+        ImageScraper::Util.absolute_url url, URI.escape(ImageScraper::Util.cleanup_url(stylesheet['href'])) rescue nil
+      end.compact
     end
   end
 end
