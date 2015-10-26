@@ -5,7 +5,7 @@ source "http://rubygems.org"
 
 gem "nokogiri"
 gem "css_parser"
-gem "rails"
+gem "rails", "~> 3.2"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
