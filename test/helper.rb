@@ -18,7 +18,7 @@ require 'image_scraper'
 
 module Test
   module Unit
-    module TestCase
+    class TestCase
     end
   end
 end
