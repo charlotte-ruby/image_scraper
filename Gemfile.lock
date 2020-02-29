@@ -33,13 +33,15 @@ GEM
     bourne (1.1.2)
       mocha (= 0.10.5)
     builder (3.0.4)
+    concurrent-ruby (1.1.5)
     css_parser (1.2.6)
       addressable
       rdoc
     erubis (2.7.0)
     git (1.2.5)
     hike (1.2.1)
-    i18n (0.6.1)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     jeweler (1.8.4)
       bundler (~> 1.0)
       git (>= 1.2.5)
