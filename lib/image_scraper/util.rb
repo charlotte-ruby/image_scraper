@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module ImageScraper
   module Util
-    def self.absolute_url(url,asset=nil)
-      # TODO - what happens when an index redirect occurs?
+    def self.absolute_url(url, asset = nil)
+      # TODO: - what happens when an index redirect occurs?
       # Example: 'http://example.com/about' specified as url
       #          'style.css' specified as asset
       #          url redirects to 'http://example.com/about/'
@@ -13,9 +15,9 @@ module ImageScraper
       #          but should get:
       #          'http://example.com/about/style.css
 
-      URI.parse(url).merge(URI.parse asset.to_s).to_s
+      URI.parse(url).merge(URI.parse(asset.to_s)).to_s
     rescue StandardError
-      print("absolute_url error")
+      print('absolute_url error')
       nil
     end
 
@@ -23,7 +25,7 @@ module ImageScraper
       uri = URI.parse(url)
       "#{uri.scheme}://#{uri.host}"
     rescue StandardError
-      print("domain error")
+      print('domain error')
       nil
     end
 
@@ -34,7 +36,7 @@ module ImageScraper
     end
 
     def self.strip_quotes(image_url)
-      image_url.gsub("'","").gsub('"','')
+      image_url.gsub("'", '').gsub('"', '')
     end
   end
 end
