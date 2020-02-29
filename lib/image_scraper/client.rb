@@ -7,7 +7,8 @@ module ImageScraper
 
     def initialize(url, options = {})
       options.reverse_merge!(convert_to_absolute_url: true, include_css_images: true, include_css_data_images: false)
-      @url = CGI.escape(url)
+      @url = URI.escape(url)
+
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
@@ -32,8 +33,8 @@ module ImageScraper
       doc.xpath('//img').each do |img|
         next if img['src'].blank?
 
-        image = CGI.escape(img['src'].strip)
-        image = image.gsub(/([{}|\^\[\]\@`])/) { |s| CGI.escape(s) } # escape characters that CGI::escape doesn't get
+        image = URI.escape(img['src'].strip)
+        image = image.gsub(/([{}|\^\[\]\@`])/) { |s| URI.escape(s) } # escape characters that CGI::escape doesn't get
         if convert_to_absolute_url
           image = ImageScraper::Util.absolute_url(url, image)
         end
@@ -61,8 +62,8 @@ module ImageScraper
               end
 
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
-          image_url = CGI.escape image_url[0]
-          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) { |s| CGI.escape(s) } # escape characters that CGI::escape doesn't get
+          image_url = URI.escape image_url[0]
+          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) { |s| URI.escape(s) } # escape characters that CGI::escape doesn't get
           if image_url.include?('data:image') && @include_css_data_images
             image_url
           else
@@ -78,7 +79,7 @@ module ImageScraper
       return [] if doc.blank?
 
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        ImageScraper::Util.absolute_url url, CGI.escape(stylesheet['href'])
+        ImageScraper::Util.absolute_url url, URI.escape(stylesheet['href'])
       end
     end
   end
