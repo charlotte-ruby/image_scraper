@@ -1,15 +1,24 @@
+# frozen_string_literal: true
+
 require 'cgi'
 module ImageScraper
   class Client
     attr_accessor :url, :convert_to_absolute_url, :include_css_images, :include_css_data_images, :doc
 
-    def initialize(url,options={})
-      options.reverse_merge!(:convert_to_absolute_url=>true,:include_css_images=>true, :include_css_data_images=>false)
+    def initialize(url, options = {})
+      options.reverse_merge!(convert_to_absolute_url: true, include_css_images: true, include_css_data_images: false)
       @url = URI.escape(url)
+
+      # @url = URI.parse(URI.encode(url))
+
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
-      html = open(@url).read rescue nil
+      html = begin
+               open(@url).read
+             rescue StandardError
+               nil
+             end
       @doc = html ? Nokogiri::HTML(html) : nil
     end
 
@@ -22,26 +31,42 @@ module ImageScraper
     def page_images
       urls = []
       return urls if doc.blank?
-      doc.xpath("//img").each do |img|
-        next if img["src"].blank?
-        image = URI.escape(img["src"].strip)
-        image = image.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
-        image = ImageScraper::Util.absolute_url(url,image) if convert_to_absolute_url
+
+      doc.xpath('//img').each do |img|
+        next if img['src'].blank?
+
+        image = URI.escape(img['src'].strip)
+        image = image.gsub(/([{}|\^\[\]\@`])/) { |s| URI.escape(s) } # escape characters that CGI::escape doesn't get
+        if convert_to_absolute_url
+          image = ImageScraper::Util.absolute_url(url, image)
+        end
         urls << image
       end
-      urls
+      urls.compact
     end
 
     def stylesheet_images
       images = []
       stylesheets.each do |stylesheet|
-        file = open(stylesheet) rescue next
-        css = file.string rescue IO.read(file) rescue next
+        file = begin
+                 open(stylesheet)
+               rescue StandardError
+                 next
+               end
+        css = begin
+                begin
+                                file.string
+                rescue StandardError
+                  IO.read(file)
+                              end
+              rescue StandardError
+                next
+              end
 
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
           image_url = URI.escape image_url[0]
-          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
-          if image_url.include?("data:image") and @include_css_data_images
+          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) { |s| URI.escape(s) } # escape characters that CGI::escape doesn't get
+          if image_url.include?('data:image') && @include_css_data_images
             image_url
           else
             image_url = ImageScraper::Util.strip_quotes(image_url)
@@ -49,11 +74,12 @@ module ImageScraper
           end
         end
       end
-      images
+      images.compact
     end
 
     def stylesheets
       return [] if doc.blank?
+
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
         ImageScraper::Util.absolute_url url, URI.escape(stylesheet['href'])
       end
