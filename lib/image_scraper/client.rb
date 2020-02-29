@@ -9,6 +9,8 @@ module ImageScraper
       options.reverse_merge!(convert_to_absolute_url: true, include_css_images: true, include_css_data_images: false)
       @url = URI.escape(url)
 
+      # @url = URI.parse(URI.encode(url))
+
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
@@ -40,7 +42,7 @@ module ImageScraper
         end
         urls << image
       end
-      urls
+      urls.compact
     end
 
     def stylesheet_images
@@ -72,7 +74,7 @@ module ImageScraper
           end
         end
       end
-      images
+      images.compact
     end
 
     def stylesheets

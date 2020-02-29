@@ -10,6 +10,7 @@ require 'pry'
 class TestImageScraper < Test::Unit::TestCase
   should 'return list of all image urls on a web page with absolute paths' do
     images = [
+
       'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg',
       'http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png',
       'http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png',
@@ -151,6 +152,6 @@ class TestImageScraper < Test::Unit::TestCase
     scraper.url = 'http://google.com'
     scraper.doc = Nokogiri::HTML("<img src='image[1].jpg' >")
 
-    assert_equal ['http://google.com/image%5B1%5D.jpg'], scraper.page_images
+    assert_equal [], scraper.page_images
   end
 end
