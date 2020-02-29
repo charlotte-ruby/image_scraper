@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
+  warn e.message
+  warn 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
 require 'rake'
@@ -12,16 +14,16 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "image_scraper"
-  gem.homepage = "http://github.com/charlotte-ruby/image_scraper"
-  gem.license = "MIT"
-  gem.summary = %Q{Simple utility to pull image urls from web page}
-  gem.description = %Q{Simple utility to pull image urls from web page}
-  gem.email = "john.mcaliley@gmail.com"
-  gem.authors = ["John McAliley"]
-  gem.add_dependency "nokogiri"
-  gem.add_dependency "css_parser"
-  gem.files.exclude "test/**/*"
+  gem.name = 'image_scraper'
+  gem.homepage = 'http://github.com/charlotte-ruby/image_scraper'
+  gem.license = 'MIT'
+  gem.summary = %(Simple utility to pull image urls from web page)
+  gem.description = %(Simple utility to pull image urls from web page)
+  gem.email = 'john.mcaliley@gmail.com'
+  gem.authors = ['John McAliley']
+  gem.add_dependency 'nokogiri'
+  gem.add_dependency 'css_parser'
+  gem.files.exclude 'test/**/*'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
@@ -32,11 +34,11 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-task :default => :test
+task default: :test
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "image_scraper #{version}"
