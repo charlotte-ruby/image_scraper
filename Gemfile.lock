@@ -59,6 +59,7 @@ GEM
     addressable (2.4.0)
     ast (2.4.0)
     builder (3.2.4)
+    coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     css_parser (1.7.1)
@@ -125,6 +126,9 @@ GEM
     parser (2.7.0.3)
       ast (~> 2.4.0)
     power_assert (1.1.5)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     psych (3.1.0)
     rack (2.2.2)
     rack-test (1.1.0)
@@ -203,6 +207,7 @@ DEPENDENCIES
   css_parser
   jeweler (~> 2.3)
   nokogiri
+  pry
   rails
   rubocop
   shoulda

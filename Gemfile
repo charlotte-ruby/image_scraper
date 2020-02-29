@@ -14,6 +14,7 @@ gem 'rails'
 group :development do
   gem 'bundler', '~> 2.0'
   gem 'jeweler', '~> 2.3'
+  gem 'pry'
   gem 'shoulda', '>= 0'
   gem 'test-unit'
   # gem "rcov", ">= 0"
