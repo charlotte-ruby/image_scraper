@@ -90,10 +90,7 @@ Style/CommentAnnotation:
 
 # Offense count: 2
 Style/Documentation:
-  Exclude:
-    - "spec/**/*"
-    - "lib/image_scraper/client.rb"
-    - "lib/image_scraper/util.rb"
+  Enabled: false
 
 # Offense count: 7
 # Cop supports --auto-correct.
