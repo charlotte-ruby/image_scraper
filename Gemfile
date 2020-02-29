@@ -13,5 +13,6 @@ group :development do
   gem "shoulda", ">= 0"
   gem "bundler", "~> 2.0"
   gem "jeweler", "~> 2.3"
+  gem "test-unit"
   #gem "rcov", ">= 0"
 end
