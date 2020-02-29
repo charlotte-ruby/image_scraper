@@ -7,16 +7,20 @@ require 'helper'
 
 class TestImageScraper < Test::Unit::TestCase
   should "return list of all image urls on a web page with absolute paths" do
-    images = ["http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
-              "http://bits.wikimedia.org/static-1.21wmf9/skins/common/images/magnify-clip.png",
-              "http://bits.wikimedia.org/static-1.21wmf9/skins/vector/images/search-ltr.png?303-4",
-              "http://bits.wikimedia.org/images/wikimedia-button.png",
-              "http://bits.wikimedia.org/static-1.21wmf9/skins/common/images/poweredby_mediawiki_88x31.png"]
-    scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:include_css_images=>false)
+    images = [
+      "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
+      "http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png",
+      "http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png",
+      "http://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1",
+      "http://en.wikipedia.org/static/images/wikimedia-button.png",
+      "http://en.wikipedia.org/static/images/poweredby_mediawiki_88x31.png"
+    ]
 
-    assert_equal images.size, scraper.image_urls.size
+    scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image", include_css_images: false)
 
-    assert_equal images, scraper.image_urls
+    scraped_images = scraper.image_urls
+
+    assert_equal images, scraped_images
   end
 
   should "return a list of images with whitespace stripped from the src" do
@@ -24,34 +28,45 @@ class TestImageScraper < Test::Unit::TestCase
     html = IO.read(File.dirname(__FILE__)+"/resources/extra_whitespace.html")
     client.doc = Nokogiri::HTML(html)
     images = ["http://g-ecx.images-amazon.com/images/G/01/SIMON/IsaacsonWalter._V164348457_.jpg","http://g-ecx.images-amazon.com/images/G/01/SIMON/IsaacsonWalter.jpg"]
-    
+
     assert_equal images, client.image_urls
   end
 
   should "return list of all image urls on a web page with relative paths" do
-    images = ["//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
-              "//bits.wikimedia.org/static-1.21wmf9/skins/common/images/magnify-clip.png",
-              "//bits.wikimedia.org/static-1.21wmf9/skins/vector/images/search-ltr.png?303-4",
-              "//bits.wikimedia.org/images/wikimedia-button.png",
-              "//bits.wikimedia.org/static-1.21wmf9/skins/common/images/poweredby_mediawiki_88x31.png"]
-    scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",:convert_to_absolute_url=>false,:include_css_images=>false)
-    
-    assert_equal images.size, scraper.image_urls.size
-    assert_equal images, scraper.image_urls
+    images = [
+      "//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg",
+      "//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png",
+      "//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png",
+      "//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1",
+      "/static/images/wikimedia-button.png",
+      "/static/images/poweredby_mediawiki_88x31.png"
+    ]
+
+    scraper = ImageScraper::Client.new("http://en.wikipedia.org/wiki/Standard_test_image",
+                                       :convert_to_absolute_url => false,
+                                       :include_css_images => false)
+
+    scraped_images = scraper.image_urls
+
+    assert_equal images, scraped_images
   end
 
   should "return list of stylesheets contained in html page (relative path)" do
     scraper = ImageScraper::Client.new ""
     scraper.doc = Nokogiri::HTML(IO.read(File.dirname(__FILE__)+"/resources/stylesheet_test.html"))
     scraper.url = "http://test.com"
-    
-    assert_equal ["http://test.com/css/master.css", "http://test.com/css/master2.css"], scraper.stylesheets
+
+    expected_stylesheets = ["http://test.com/css/master.css", "http://test.com/css/master2.css"]
+
+    assert_equal expected_stylesheets, scraper.stylesheets
   end
 
   should "return proper absolute url for a page and asset" do
     assert_equal "http://www.test.com/image.gif", ImageScraper::Util.absolute_url("http://www.test.com","image.gif")
     assert_equal "http://www.test.com/images/image.gif",ImageScraper::Util.absolute_url("http://www.test.com","images/image.gif")
+
     assert_equal "http://www.test.com/images/image.gif",ImageScraper::Util.absolute_url("http://www.test.com","/images/image.gif")
+
     assert_equal "http://www.test.com/image.gif", ImageScraper::Util.absolute_url("http://www.test.com/","image.gif")
     assert_equal "http://www.test.com/images/image.gif", ImageScraper::Util.absolute_url("http://www.test.com/","/images/image.gif")
     assert_equal "http://www.test.com/images/image.gif", ImageScraper::Util.absolute_url("http://www.test.com/","images/image.gif")
@@ -61,7 +76,9 @@ class TestImageScraper < Test::Unit::TestCase
   end
 
   should "return images from a stylesheet" do
-    scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html', :include_css_images => true
+    url = 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html'
+    scraper = ImageScraper::Client.new(url, include_css_images: true)
+
     assert scraper.stylesheet_images.include? 'https://raw.github.com/charlotte-ruby/image_scraper/master/some%20image.png'
   end
 
