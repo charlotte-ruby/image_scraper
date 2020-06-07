@@ -81,7 +81,7 @@ class TestImageScraper < Test::Unit::TestCase
     url = 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html'
     scraper = ImageScraper::Client.new(url, include_css_images: true)
 
-    assert scraper.stylesheet_images.include? 'https://raw.github.com/charlotte-ruby/image_scraper/master/some%20image.png'
+    assert scraper.stylesheet_images.include? 'https://raw.github.com/charlotte-ruby/image_scraper/master/someimage.png'
   end
 
   should 'strip quotes from a url' do
@@ -126,12 +126,14 @@ class TestImageScraper < Test::Unit::TestCase
     scraper = ImageScraper::Client.new ''
     scraper.url = 'http://test.com'
     scraper.doc = Nokogiri::HTML("<link rel='stylesheet' href='http://test.com/unescaped path.css'>")
-    assert_equal ['http://test.com/unescaped%20path.css'], scraper.stylesheets
+
+    assert_equal ['http://test.com/unescapedpath.css'], scraper.stylesheets
   end
 
   should 'Handle a stylesheet image with an unescaped url' do
     scraper = ImageScraper::Client.new 'https://raw.github.com/charlotte-ruby/image_scraper/master/test/resources/stylesheet_unescaped_image.html', include_css_images: true
-    assert_equal ['https://raw.github.com/charlotte-ruby/image_scraper/master/some%20image.png'], scraper.stylesheet_images
+
+    assert_equal ['https://raw.github.com/charlotte-ruby/image_scraper/master/someimage.png'], scraper.stylesheet_images
   end
 
   should 'Handle a stylesheet image with a relative url' do
