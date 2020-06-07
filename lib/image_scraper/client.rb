@@ -14,12 +14,8 @@ module ImageScraper
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
-      html = begin
-               open(@url).read
-             rescue StandardError
-               nil
-             end
-      @doc = html ? Nokogiri::HTML(html) : nil
+      html = open(@url).read rescue nil
+      @doc = html ? Nokogiri::HTML(html, nil, 'UTF-8') : nil
     end
 
     def image_urls
@@ -48,28 +44,15 @@ module ImageScraper
     def stylesheet_images
       images = []
       stylesheets.each do |stylesheet|
-        file = begin
-                 open(stylesheet)
-               rescue StandardError
-                 next
-               end
-        css = begin
-                begin
-                                file.string
-                rescue StandardError
-                  IO.read(file)
-                              end
-              rescue StandardError
-                next
-              end
-
+        file = open(stylesheet) rescue next
+        css = file.string rescue IO.read(file) rescue next
+        css = css.unpack("C*").pack("U*")
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
-          image_url = URI.escape image_url[0]
-          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) { |s| URI.escape(s) } # escape characters that CGI::escape doesn't get
-          if image_url.include?('data:image') && @include_css_data_images
+          image_url = URI.escape ImageScraper::Util.cleanup_url(image_url[0])
+          image_url = image_url.gsub(/([{}|\^\[\]\@`])/) {|s| CGI.escape(s)} # escape characters that URI.escape doesn't get
+          if image_url.include?("data:image") and @include_css_data_images
             image_url
           else
-            image_url = ImageScraper::Util.strip_quotes(image_url)
             @convert_to_absolute_url ? ImageScraper::Util.absolute_url(stylesheet, image_url) : image_url
           end
         end
@@ -81,8 +64,8 @@ module ImageScraper
       return [] if doc.blank?
 
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        ImageScraper::Util.absolute_url url, URI.escape(stylesheet['href'])
-      end
+        ImageScraper::Util.absolute_url url, URI.escape(ImageScraper::Util.cleanup_url(stylesheet['href'])) rescue nil
+      end.compact
     end
   end
 end
