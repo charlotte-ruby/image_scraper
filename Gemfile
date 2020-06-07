@@ -21,5 +21,7 @@ group :development do
   gem 'shoulda', '>= 0'
   gem 'test-unit'
   # gem "rcov", ">= 0"
-  gem 'rubocop', require: false
+  gem 'guard-rspec', require: false
+  gem 'rspec', '~> 3.4'
+  gem 'rubocop-rspec', require: false
 end
