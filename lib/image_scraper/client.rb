@@ -15,7 +15,7 @@ module ImageScraper
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
       html = begin
-               open(@url).read
+               URI.open(@url).read
              rescue StandardError
                nil
              end
@@ -49,7 +49,7 @@ module ImageScraper
       images = []
       stylesheets.each do |stylesheet|
         file = begin
-                 open(stylesheet)
+                 URI.open(stylesheet)
                rescue StandardError
                  next
                end
