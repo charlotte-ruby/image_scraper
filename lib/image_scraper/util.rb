@@ -17,7 +17,6 @@ module ImageScraper
 
       URI.parse(url).merge(URI.parse(asset.to_s)).to_s
     rescue StandardError
-      print('absolute_url error')
       nil
     end
 
@@ -35,8 +34,24 @@ module ImageScraper
       nil
     end
 
+    def self.strip_backslashes(image_url)
+      image_url.gsub('\\', '')
+    end
+
     def self.strip_quotes(image_url)
       image_url.gsub("'", '').gsub('"', '')
+    end
+
+    def self.chomp(image_url)
+      image_url.gsub(/\s/, '')
+    end
+
+    def self.cleanup_url(image_url)
+      ImageScraper::Util.chomp(
+        ImageScraper::Util.strip_quotes(
+          ImageScraper::Util.strip_backslashes(image_url || '')
+        )
+      )
     end
   end
 end
