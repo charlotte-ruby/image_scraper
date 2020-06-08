@@ -129,9 +129,9 @@ describe ImageScraper::Client do
 
   describe '#stylesheet_images' do
     it 'scrapes stylesheet images' do
-      url = "#{repo_url}/master/test/resources/stylesheet_unescaped_image.html"
+      url = "#{repo_url}/master/spec/support/stylesheet_unescaped_image.html"
       stylesheet_path = "#{repo_url}/master/someimage.png"
-
+      # /charlotte-ruby/image_scraper/master/spec/support/unescaped_image.css
       scraper = described_class.new(url, include_css_images: true)
 
       expect(scraper.stylesheet_images).to include(stylesheet_path)
@@ -146,8 +146,8 @@ describe ImageScraper::Client do
     end
 
     it 'handles stylesheet image with a relative url' do
-      url = "#{repo_url}/master/test/resources/relative_image_url.html"
-      image_url = "#{repo_url}/master/test/images/some_image.png"
+      url = "#{repo_url}/master/spec/support/relative_image_url.html"
+      image_url = "#{repo_url}/master/spec/images/some_image.png"
 
       scraper = described_class.new(url, include_css_images: true)
 
