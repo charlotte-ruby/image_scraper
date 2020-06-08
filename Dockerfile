@@ -10,4 +10,4 @@ RUN bundle install
 
 COPY . .
 
-CMD ["bundle", "exec", "rake"]
+CMD ["bundle", "exec", "rspec"]
