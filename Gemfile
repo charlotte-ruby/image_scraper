@@ -15,6 +15,5 @@ group :development do
   gem 'pry'
   gem 'rspec', '~> 3.4'
   gem 'rubocop-rspec', require: false
-  gem 'shoulda', '>= 0'
   gem 'test-unit'
 end
