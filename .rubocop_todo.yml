@@ -12,7 +12,7 @@
 # SupportedStyles: empty_lines, no_empty_lines
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
-    - 'spec/image_scraper/util_spec.rb'
+    - "spec/image_scraper/util_spec.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -20,7 +20,7 @@ Layout/EmptyLinesAroundBlockBody:
 # SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines, beginning_only, ending_only
 Layout/EmptyLinesAroundClassBody:
   Exclude:
-    - 'test/image_scraper_test.rb'
+    - "test/image_scraper_test.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -28,18 +28,18 @@ Layout/EmptyLinesAroundClassBody:
 # SupportedStyles: final_newline, final_blank_line
 Layout/TrailingEmptyLines:
   Exclude:
-    - 'spec/image_scraper/client_spec.rb'
+    - "spec/image_scraper/client_spec.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Lint/OrderedMagicComments:
   Exclude:
-    - 'image_scraper.gemspec'
+    - "image_scraper.gemspec"
 
 # Offense count: 5
 Lint/UriEscapeUnescape:
   Exclude:
-    - 'lib/image_scraper/client.rb'
+    - "lib/image_scraper/client.rb"
 
 # Offense count: 2
 # Configuration parameters: IgnoredMethods.
@@ -51,6 +51,7 @@ Metrics/AbcSize:
 # ExcludedMethods: refine
 Metrics/BlockLength:
   Max: 70
+  ExcludedMethods: ["describe", "context"]
 
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
@@ -71,8 +72,8 @@ Metrics/PerceivedComplexity:
 # Configuration parameters: Max.
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/image_scraper/client_spec.rb'
-    - 'spec/image_scraper/util_spec.rb'
+    - "spec/image_scraper/client_spec.rb"
+    - "spec/image_scraper/util_spec.rb"
 
 # Offense count: 2
 RSpec/MultipleExpectations:
@@ -81,15 +82,15 @@ RSpec/MultipleExpectations:
 # Offense count: 2
 Security/Open:
   Exclude:
-    - 'lib/image_scraper/client.rb'
+    - "lib/image_scraper/client.rb"
 
 # Offense count: 2
 Style/Documentation:
   Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'lib/image_scraper/client.rb'
-    - 'lib/image_scraper/util.rb'
+    - "spec/**/*"
+    - "test/**/*"
+    - "lib/image_scraper/client.rb"
+    - "lib/image_scraper/util.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -97,21 +98,21 @@ Style/Documentation:
 # SupportedStyles: always, always_true, never
 Style/FrozenStringLiteralComment:
   Exclude:
-    - 'Guardfile'
+    - "Guardfile"
 
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/IfUnlessModifier:
   Exclude:
-    - 'image_scraper.gemspec'
-    - 'lib/image_scraper/client.rb'
+    - "image_scraper.gemspec"
+    - "lib/image_scraper/client.rb"
 
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.
 Style/PercentLiteralDelimiters:
   Exclude:
-    - 'Guardfile'
+    - "Guardfile"
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -119,8 +120,8 @@ Style/PercentLiteralDelimiters:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Exclude:
-    - 'Guardfile'
-    - 'spec/image_scraper/client_spec.rb'
+    - "Guardfile"
+    - "spec/image_scraper/client_spec.rb"
 
 # Offense count: 6
 # Cop supports --auto-correct.

@@ -9,9 +9,11 @@ rescue Bundler::BundlerError => e
   warn 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
-require 'rake'
 
+require 'rake'
 require 'jeweler'
+require 'rdoc/task'
+
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = 'image_scraper'
@@ -25,18 +27,9 @@ Jeweler::Tasks.new do |gem|
   gem.add_dependency 'css_parser'
   gem.files.exclude 'test/**/*'
 end
+
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
-end
-
-task default: :test
-
-require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
