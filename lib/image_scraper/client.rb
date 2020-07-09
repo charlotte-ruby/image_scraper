@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 require 'cgi'
@@ -35,7 +36,7 @@ module ImageScraper
     end
 
     def fetch(uri, limit = 10)
-      raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+      raise ArgumentError, 'HTTP redirect too deep' if limit.zero?
 
       uri = cleanup_uri(uri)
 
