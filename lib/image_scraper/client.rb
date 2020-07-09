@@ -1,23 +1,58 @@
 # frozen_string_literal: true
-
+require 'net/http'
+require 'uri'
 require 'cgi'
+
 module ImageScraper
   class Client
+    USER_AGENT = 'Mozilla/5.0 (Macintosh)'
+
     attr_accessor :url, :convert_to_absolute_url, :include_css_images, :include_css_data_images, :doc
 
     def initialize(url, options = {})
       options.reverse_merge!(convert_to_absolute_url: true, include_css_images: true, include_css_data_images: false)
-      @url = URI.escape(url)
+      @url = url # URI.escape(url)
 
       @convert_to_absolute_url = options[:convert_to_absolute_url]
       @include_css_images = options[:include_css_images]
       @include_css_data_images = options[:include_css_data_images]
-      html = begin
-               URI.open(@url).read
-             rescue StandardError
-               nil
-             end
+
+      begin
+        html = fetch(url)
+      rescue StandardError
+        html = nil
+      end
+
       @doc = html ? Nokogiri::HTML(html, nil, 'UTF-8') : nil
+    end
+
+    def fetch(uri, limit = 10)
+      raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+
+      unless uri.is_a?(URI::HTTP)
+        unless uri.include?("://")
+          uri = "http://#{uri}"
+        end
+        uri = URI.parse(uri)
+      end
+
+      result = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.port == 443) do |http|
+        request = Net::HTTP::Get.new(uri, { 'User-Agent' => USER_AGENT })
+        response = http.request request
+
+        case response
+          when Net::HTTPSuccess     then response
+          when Net::HTTPRedirection then fetch(response['location'], limit - 1)
+        else
+          response.error!
+        end
+      end
+
+      if result.is_a? Net::HTTPOK
+        result.body
+      elsif result.is_a? String
+        result
+      end
     end
 
     def image_urls
@@ -33,13 +68,14 @@ module ImageScraper
       doc.xpath('//img').each do |img|
         next if img['src'].blank?
 
-        image = URI.escape(img['src'].strip)
-        image = image.gsub(/([{}|\^\[\]\@`])/) { |s| URI.escape(s) } # escape characters that CGI::escape doesn't get
+        image = img['src'].strip
+        image = image.gsub(/([{}|\^\[\]\@`])/) { |s| s } # escape characters that CGI::escape doesn't get
         if convert_to_absolute_url
           image = ImageScraper::Util.absolute_url(url, image)
         end
         urls << image
       end
+
       urls.compact
     end
 
@@ -62,7 +98,7 @@ module ImageScraper
               end
         css = css.unpack('C*').pack('U*')
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
-          image_url = URI.escape ImageScraper::Util.cleanup_url(image_url[0])
+          image_url = ImageScraper::Util.cleanup_url(image_url[0])
           image_url = image_url.gsub(/([{}|\^\[\]\@`])/) { |s| CGI.escape(s) } # escape characters that URI.escape doesn't get
           if image_url.include?('data:image') && @include_css_data_images
             image_url
@@ -78,7 +114,7 @@ module ImageScraper
       return [] if doc.blank?
 
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        ImageScraper::Util.absolute_url url, URI.escape(ImageScraper::Util.cleanup_url(stylesheet['href']))
+        ImageScraper::Util.absolute_url url, ImageScraper::Util.cleanup_url(stylesheet['href'])
       rescue StandardError
         nil
       end.compact

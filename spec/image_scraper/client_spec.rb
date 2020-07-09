@@ -6,15 +6,25 @@ require 'image_scraper'
 describe ImageScraper::Client do
   let(:repo_url) { "https://raw.github.com/charlotte-ruby/image_scraper" }
 
+  describe "foo" do
+    it "something" do
+      url = "http://www.amazon.com/Planet-Two-Disc-Digital-Combo-Blu-ray/dp/B004LWZW4W/ref=sr_1_1?s=movies-tv&ie=UTF8&qid=1324771542&sr=1-1"
+
+      client = described_class.new(url)
+
+      expect(client.page_images).not_to be_empty
+    end
+  end
+
   describe "#initialize" do
     it 'works with invalid URLs' do
-      scraper = described_class.new('couponshack.com')
+      scraper = described_class.new('bogusurl4444.com')
 
       expect(scraper.doc).to be(nil)
     end
 
     it 'has empty data if URL is invalid' do
-      scraper = described_class.new('couponshack.com')
+      scraper = described_class.new('bogusurl4444.com')
 
       expect(scraper.image_urls).to be_empty
       expect(scraper.stylesheets).to be_empty
