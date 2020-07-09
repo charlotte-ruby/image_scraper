@@ -26,23 +26,26 @@ module ImageScraper
       @doc = html ? Nokogiri::HTML(html, nil, 'UTF-8') : nil
     end
 
+    def cleanup_uri(uri)
+      if uri.is_a?(URI::HTTP)
+        uri
+      else
+        uri.include?('://') ? URI.parse(uri) : "http://#{uri}"
+      end
+    end
+
     def fetch(uri, limit = 10)
       raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 
-      unless uri.is_a?(URI::HTTP)
-        unless uri.include?("://")
-          uri = "http://#{uri}"
-        end
-        uri = URI.parse(uri)
-      end
+      uri = cleanup_uri(uri)
 
       result = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.port == 443) do |http|
         request = Net::HTTP::Get.new(uri, { 'User-Agent' => USER_AGENT })
         response = http.request request
 
         case response
-          when Net::HTTPSuccess     then response
-          when Net::HTTPRedirection then fetch(response['location'], limit - 1)
+        when Net::HTTPSuccess     then response
+        when Net::HTTPRedirection then fetch(response['location'], limit - 1)
         else
           response.error!
         end
