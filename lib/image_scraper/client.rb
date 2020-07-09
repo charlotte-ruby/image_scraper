@@ -89,10 +89,10 @@ module ImageScraper
                end
         css = begin
                 begin
-                                file.string
+                  file.string
                 rescue StandardError
                   IO.read(file)
-                              end
+                end
               rescue StandardError
                 next
               end
