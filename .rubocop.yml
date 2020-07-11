@@ -17,3 +17,15 @@ Style/HashTransformKeys:
   Enabled: True
 Style/HashTransformValues:
   Enabled: True
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: True
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: True
+Lint/MixedRegexpCaptureTypes:
+  Enabled: True
+Style/RedundantRegexpCharacterClass:
+  Enabled: False
+Style/RedundantRegexpEscape:
+  Enabled: False
+Style/SlicingWithRange:
+  Enabled: True

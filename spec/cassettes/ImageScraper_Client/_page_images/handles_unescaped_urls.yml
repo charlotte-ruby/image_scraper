@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://test.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh)
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - test.com
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - nginx/1.16.1
+      Date:
+      - Sat, 11 Jul 2020 03:19:00 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      X-Dis-Request-Id:
+      - a2838aa187355b40c449c1d4341cc5d8
+      Location:
+      - http://www.test.com/
+    body:
+      encoding: UTF-8
+      string: "<html><head><title>301 Moved Permanently</title></head><body bgcolor='white'><center><h1>301
+        Moved Permanently</h1><h2>Object moved to <a href='http://www.test.com/'>here</a>.</h2></center><hr><center>DOSarrest
+        Internet Security</center></body></html>\n"
+  recorded_at: Sat, 11 Jul 2020 03:19:00 GMT
+- request:
+    method: get
+    uri: http://www.test.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh)
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - www.test.com
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - nginx/1.16.1
+      Date:
+      - Sat, 11 Jul 2020 03:19:00 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      X-Dis-Request-Id:
+      - 8b09747e816f16714b25596e80293886
+      Location:
+      - https://www.test.com/
+    body:
+      encoding: UTF-8
+      string: "<html><head><title>301 Moved Permanently</title></head><body bgcolor='white'><center><h1>301
+        Moved Permanently</h1><h2>Object moved to <a href='https://www.test.com/'>here</a>.</h2></center><hr><center>DOSarrest
+        Internet Security</center></body></html>\n"
+  recorded_at: Sat, 11 Jul 2020 03:19:01 GMT
+- request:
+    method: get
+    uri: https://www.test.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh)
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - www.test.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.16.1
+      Date:
+      - Sat, 11 Jul 2020 03:19:01 GMT
+      Content-Type:
+      - text/html
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      X-Dis-Request-Id:
+      - ab80d220c4e964a267b7edb970c710d0
+      P3p:
+      - CP="NON DSP COR ADMa OUR IND UNI COM NAV INT"
+      Cache-Control:
+      - no-cache
+    body:
+      encoding: ASCII-8BIT
+      string: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta
+        http-equiv=\"Content-Script-Type\" content=\"text/javascript\">\n<script type=\"text/javascript\">\nfunction
+        getCookie(c_name) { // Local function for getting a cookie value\n    if (document.cookie.length
+        > 0) {\n        c_start = document.cookie.indexOf(c_name + \"=\");\n        if
+        (c_start!=-1) {\n        c_start=c_start + c_name.length + 1;\n        c_end=document.cookie.indexOf(\";\",
+        c_start);\n\n        if (c_end==-1) \n            c_end = document.cookie.length;\n\n
+        \       return unescape(document.cookie.substring(c_start,c_end));\n        }\n
+        \   }\n    return \"\";\n}\nfunction setCookie(c_name, value, expiredays)
+        { // Local function for setting a value of a cookie\n    var exdate = new
+        Date();\n    exdate.setDate(exdate.getDate()+expiredays);\n    document.cookie
+        = c_name + \"=\" + escape(value) + ((expiredays==null) ? \"\" : \";expires=\"
+        + exdate.toGMTString()) + \";path=/\";\n}\nfunction getHostUri() {\n    var
+        loc = document.location;\n    return loc.toString();\n}\nsetCookie('YPF8827340282Jdskjhfiw_928937459182JAX666',
+        '66.115.168.6', 10);\ntry {  \n    location.reload(true);  \n} catch (err1)
+        {  \n    try {  \n        location.reload();  \n    } catch (err2) {  \n    \tlocation.href
+        = getHostUri();  \n    }  \n}\n</script>\n</head>\n<body>\n<noscript>This
+        site requires JavaScript and Cookies to be enabled. Please change your browser
+        settings or upgrade your browser.</noscript>\n</body>\n</html>\n"
+  recorded_at: Sat, 11 Jul 2020 03:19:01 GMT
+recorded_with: VCR 6.0.0
