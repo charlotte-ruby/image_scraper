@@ -16,4 +16,6 @@ group :development do
   gem 'rspec', '~> 3.4'
   gem 'rubocop-rspec', require: false
   gem 'test-unit'
+  gem 'vcr', '~> 6.0'
+  gem 'webmock'
 end

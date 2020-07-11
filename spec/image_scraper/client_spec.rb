@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'image_scraper'
 
-describe ImageScraper::Client do
+describe ImageScraper::Client, :vcr do
   let(:repo_url) { "https://raw.github.com/charlotte-ruby/image_scraper" }
 
   describe "foo" do
@@ -82,7 +82,7 @@ describe ImageScraper::Client do
       expect(scraper.image_urls).to eq(images)
     end
 
-    xit 'handles url with unescaped spaces' do
+    it 'handles url with unescaped spaces' do
       url = 'https://raw.github.com/syoder/image_scraper/stylesheet_fix/test/resources/space in url.html'
 
       scraper = described_class.new(url, include_css_images: false)
@@ -98,9 +98,8 @@ describe ImageScraper::Client do
     it 'lists relative path stylesheets' do
       file = 'spec/support/stylesheet_test.html'
 
-      client = described_class.new('')
+      client = described_class.new('http://test.com')
       client.doc = File.open(file) { |f| Nokogiri::HTML(f) }
-      client.url = 'http://test.com'
 
       stylesheets = [
         'http://test.com/css/master.css',
@@ -120,8 +119,8 @@ describe ImageScraper::Client do
   end
 
   describe '#page_images' do
-    xit 'handles unescaped urls' do
-      scraper = described_class.new('')
+    it 'handles unescaped urls' do
+      scraper = described_class.new('http://test.com')
       scraper.doc = Nokogiri::HTML("<img src='http://test.com/unescaped path'>")
 
       expect(scraper.page_images.length).to eq(1)
@@ -129,8 +128,7 @@ describe ImageScraper::Client do
     end
 
     it 'handldes image urls that include square brackets' do
-      scraper = described_class.new('')
-      scraper.url = 'http://google.com'
+      scraper = described_class.new('http://google.com')
       scraper.doc = Nokogiri::HTML("<img src='image[1].jpg' >")
 
       expect(scraper.page_images).to be_empty
