@@ -85,27 +85,31 @@ module ImageScraper
       end.compact
     end
 
+    def fetch_css(url)
+      begin
+        file = URI.open(url)
+      rescue StandardError
+        return ''
+      end
+
+      begin
+        css = file.string
+      rescue StandardError
+        css = IO.read(file)
+      rescue StandardError
+        return ''
+      end
+
+      css.unpack('C*').pack('U*')
+    end
+
     def stylesheet_images
       images = []
 
       stylesheets.each do |stylesheet|
-        file = begin
-                 URI.open(stylesheet)
-               rescue StandardError
-                 next
-               end
+        css = fetch_css(stylesheet)
 
-        css = begin
-                begin
-                  file.string
-                rescue StandardError
-                  IO.read(file)
-                end
-              rescue StandardError
-                next
-              end
-
-        css = css.unpack('C*').pack('U*')
+        next unless css.to_s.length.positive?
 
         images += css.scan(/url\((.*?)\)/).collect do |image_url|
           image_url = Util.cleanup_url(image_url[0])

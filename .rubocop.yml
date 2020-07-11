@@ -29,3 +29,11 @@ Style/RedundantRegexpEscape:
   Enabled: False
 Style/SlicingWithRange:
   Enabled: True
+Style/AccessorGrouping:
+  Enabled: True
+Style/BisectedAttrAccessor:
+  Enabled: True
+Style/RedundantAssignment:
+  Enabled: True
+Style/RedundantFetchBlock:
+  Enabled: True
