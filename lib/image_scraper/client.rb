@@ -124,14 +124,8 @@ module ImageScraper
       return [] if doc.blank?
 
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
-        begin
-          Util.absolute_url(@uri.to_s, Util.cleanup_url(stylesheet['href']))
-        rescue StandardError
-          nil
-        end
+        Util.absolute_url(@uri.to_s, Util.cleanup_url(stylesheet['href']))
       end.compact
     end
-
   end
 end
-
