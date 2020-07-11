@@ -1,0 +1,260 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://raw.github.com/charlotte-ruby/image_scraper/master/spec/support/relative_image_url.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh)
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - raw.github.com
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Location:
+      - https://raw.githubusercontent.com/charlotte-ruby/image_scraper/master/spec/support/relative_image_url.html
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 11 Jul 2020 02:47:46 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-fty21334-FTY
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-Id:
+      - 42defefcb229163cf23f39d4a0e7bb09dc2346c7
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Sat, 11 Jul 2020 02:47:46 GMT
+- request:
+    method: get
+    uri: https://raw.githubusercontent.com/charlotte-ruby/image_scraper/master/spec/support/relative_image_url.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh)
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - raw.githubusercontent.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '361'
+      Cache-Control:
+      - max-age=300
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'unsafe-inline'; sandbox
+      Content-Type:
+      - text/plain; charset=utf-8
+      Etag:
+      - W/"5d863c870c1499165ae27fc405308b04c53be69e32f5d1a80e1e1265c1165454"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish (Varnish/6.0)
+      X-Github-Request-Id:
+      - 8CE0:4149:2B2888:32CDBC:5F092851
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 11 Jul 2020 02:47:47 GMT
+      X-Served-By:
+      - cache-fty21353-FTY
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1594435667.903284,VS0,VE105
+      Vary:
+      - Authorization,Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fastly-Request-Id:
+      - 53c0ddf688d229bb9907820b623a2f696ff20874
+      Expires:
+      - Sat, 11 Jul 2020 02:52:47 GMT
+      Source-Age:
+      - '0'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+        <html lang="en">
+          <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>stylesheet_test</title>
+            <meta name="generator" content="TextMate http://macromates.com/" />
+            <meta name="author" content="John McAliley" />
+            <link
+              rel="stylesheet"
+              href="relative_image_url.css"
+              type="text/css"
+              media="screen"
+              title="no title"
+              charset="utf-8"
+            />
+            <!-- Date: 2011-06-01 -->
+          </head>
+          <body></body>
+        </html>
+  recorded_at: Sat, 11 Jul 2020 02:47:47 GMT
+- request:
+    method: get
+    uri: https://raw.github.com/charlotte-ruby/image_scraper/master/spec/support/relative_image_url.css
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Location:
+      - https://raw.githubusercontent.com/charlotte-ruby/image_scraper/master/spec/support/relative_image_url.css
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 11 Jul 2020 02:47:47 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-fty21382-FTY
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-Id:
+      - c4d0c44089a9cd9f259ba5dfba01b82886c5bdd3
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Sat, 11 Jul 2020 02:47:47 GMT
+- request:
+    method: get
+    uri: https://raw.githubusercontent.com/charlotte-ruby/image_scraper/master/spec/support/relative_image_url.css
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '75'
+      Cache-Control:
+      - max-age=300
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'unsafe-inline'; sandbox
+      Content-Type:
+      - text/plain; charset=utf-8
+      Etag:
+      - W/"2c5ae7c2bb86ae5983019ef6e4fdd989bb35f94f20f3fd73e86ed5d9a953c9d1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish (Varnish/6.0)
+      X-Github-Request-Id:
+      - A436:5FF4:137A64:1747FA:5F092852
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 11 Jul 2020 02:47:47 GMT
+      X-Served-By:
+      - cache-fty21326-FTY
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1594435667.266851,VS0,VE115
+      Vary:
+      - Authorization,Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fastly-Request-Id:
+      - d8d1068470ba9ef99c8926302b7cfd66c55e3673
+      Expires:
+      - Sat, 11 Jul 2020 02:52:47 GMT
+      Source-Age:
+      - '0'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        .test {
+          background-image: url('../images/some_image.png')
+        }
+  recorded_at: Sat, 11 Jul 2020 02:47:47 GMT
+recorded_with: VCR 6.0.0

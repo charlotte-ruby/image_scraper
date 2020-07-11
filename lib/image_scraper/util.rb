@@ -20,6 +20,22 @@ module ImageScraper
       nil
     end
 
+    def self.convert_to_uri(url)
+      if url.is_a?(URI::HTTP)
+        url
+      else
+        url = url.strip
+        url = "http://#{url}" unless url.include?('://')
+        url = url.gsub(' ', '%20') if url.include?(' ')
+
+        begin
+          URI.parse(url)
+        rescue URI::InvalidURIError
+          nil
+        end
+      end
+    end
+
     def self.domain(url)
       uri = URI.parse(url)
       "#{uri.scheme}://#{uri.host}"
