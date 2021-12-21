@@ -26,6 +26,7 @@ Jeweler::Tasks.new do |gem|
   gem.add_dependency 'nokogiri'
   gem.add_dependency 'css_parser'
   gem.files.exclude 'test/**/*'
+  gem.required_ruby_version = '>= 2.6.9'
 end
 
 Jeweler::RubygemsDotOrgTasks.new

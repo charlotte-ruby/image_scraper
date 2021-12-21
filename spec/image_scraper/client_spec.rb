@@ -18,12 +18,16 @@ describe ImageScraper::Client, :vcr do
 
   describe "#initialize" do
     it 'works with invalid URLs' do
+      allow_any_instance_of(described_class).to receive(:fetch).and_return(nil)
+
       scraper = described_class.new('bogusurl4444.com')
 
       expect(scraper.doc).to be(nil)
     end
 
     it 'has empty data if URL is invalid' do
+      allow_any_instance_of(described_class).to receive(:fetch).and_return(nil)
+
       scraper = described_class.new('bogusurl4444.com')
 
       expect(scraper.image_urls).to be_empty
