@@ -38,6 +38,14 @@ Get the images from the url specified when you initialized the client:
     image_scraper.image_urls
 
 This will return an array of strings.
+
+### CLI Usage
+
+```
+gem install image_scraper
+image_scraper https://unsplash.com
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
