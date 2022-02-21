@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
-print "sample exec file #{__FILE__}"
+url = ARGV[0]
+
+require 'image_scraper'
+
+image_scraper = ImageScraper.new(url)
+
+scraped_urls = image_scraper.image_urls
+
+puts scraped_urls * "\n" if scraped_urls.count > 0
