@@ -11,7 +11,7 @@ gem 'rspec', '~> 3.4'
 gem 'rubocop', '~> 1.21'
 
 group :development do
-  gem 'bundler', '~> 2.0'
+  gem 'bundler', '~> 2.3'
   gem 'guard-rspec', require: false
   gem 'pry'
   gem 'rubocop-rspec', require: false
