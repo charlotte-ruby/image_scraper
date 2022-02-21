@@ -56,12 +56,12 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/charlo
 - Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 - Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+## Copyright
 
 Copyright (c) 2011 John McAliley. See LICENSE.txt for
 further details.
+
 ## Code of Conduct
 
 Everyone interacting in the ImageScraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
+
