@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 url = ARGV[0]
 
@@ -8,4 +9,4 @@ image_scraper = ImageScraper::Client.new(url)
 
 scraped_urls = image_scraper.image_urls
 
-puts scraped_urls * "\n" if scraped_urls.count > 0
+puts scraped_urls * "\n" if scraped_urls.count.positive?
