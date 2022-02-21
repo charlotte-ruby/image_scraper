@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
     s.required_rubygems_version = Gem::Requirement.new('>= 0')
   end
   s.authors = ['John McAliley']
-  s.date = '2013-01-17'
   s.description = 'Simple utility to pull image urls from web page'
   s.email = 'john.mcaliley@gmail.com'
   s.extra_rdoc_files = [
@@ -77,4 +76,5 @@ Gem::Specification.new do |s|
     s.add_dependency('shoulda', ['>= 0'])
     s.add_dependency('shoulda', ['>= 0'])
   end
+  s.metadata['rubygems_mfa_required'] = 'true'
 end

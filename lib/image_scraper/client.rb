@@ -95,7 +95,7 @@ module ImageScraper
       begin
         css = file.string
       rescue StandardError
-        css = IO.read(file)
+        css = File.read(file)
       rescue StandardError
         return ''
       end
