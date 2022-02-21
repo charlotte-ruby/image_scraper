@@ -2,6 +2,7 @@
 
 require 'webmock/rspec'
 require 'vcr'
+require 'image_scraper'
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
