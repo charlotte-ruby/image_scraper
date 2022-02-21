@@ -4,7 +4,7 @@ url = ARGV[0]
 
 require 'image_scraper'
 
-image_scraper = ImageScraper.new(url)
+image_scraper = ImageScraper::Client.new(url)
 
 scraped_urls = image_scraper.image_urls
 
