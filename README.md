@@ -48,6 +48,14 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/charlotte-ruby/image_scraper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
 
+- Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+- Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+- Fork the project
+- Start a feature/bugfix branch
+- Commit and push until you are happy with your contribution
+- Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+- Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
