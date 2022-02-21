@@ -6,7 +6,7 @@ ruby File.read('.ruby-version').chomp
 
 gem 'css_parser'
 gem 'nokogiri'
-gem 'rails'
+gem 'rails', '~> 6.1'
 
 group :development do
   gem 'bundler', '~> 2.0'
