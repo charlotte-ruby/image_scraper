@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+print "sample exec file #{__FILE__}"
