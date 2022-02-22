@@ -1,6 +1,7 @@
 name: Main
 
-on: [push]
+on:
+  push
 
 jobs:
   build-and-run-tests:
