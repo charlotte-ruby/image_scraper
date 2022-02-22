@@ -1,7 +1,10 @@
-name: Main
+name: Ruby
 
 on:
-  push
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   build-and-run-tests:
