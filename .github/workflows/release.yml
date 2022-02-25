@@ -12,14 +12,18 @@ jobs:
           release-type: ruby
           package-name: impressionist
           bump-minor-pre-major: true
-          version-file: "lib/impressionist/version.rb"
       - uses: actions/checkout@v2
-        if: ${{ steps.release.outputs.release_created }}
+        if: steps.release.outputs.release_created
       - uses: ruby/setup-ruby@v1
-        if: ${{ steps.release.outputs.release_created }}
+        with:
+          bundler-cache: true
+        if: steps.release.outputs.release_created
       - run: bundle
-        if: $${{ steps.release.outputs.release_created }}
+        if: steps.release.outputs.release_created
       - name: publish gem
+        if: steps.release.outputs.release_created
+        env:
+           GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
         run: |
           mkdir -p $HOME/.gem
           touch $HOME/.gem/credentials
@@ -27,6 +31,3 @@ jobs:
           printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
           gem build *.gemspec
           gem push *.gem
-        env:
-           GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
-        if: ${{ steps.release.outputs.release_created }}
