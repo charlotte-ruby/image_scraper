@@ -1,20 +1,25 @@
-# image_scraper
+# ImageScraper
 
-![Ruby](https://github.com/charlotte-ruby/image_scraper/workflows/Ruby/badge.svg)
+![Ruby](https://github.com/charlotte-ruby/image_scraper/workflows/main/badge.svg)
 
-Simple utility that pulls image URLS from web page
+Simple utility that pulls image URLs from web page
+## Installation
 
-## INSTALL
+Add this line to your application's Gemfile:
 
-Add to your gemfile
+```ruby
+gem 'image_scraper'
+```
 
-    gem "image_scraper"
+And then execute:
 
-Install w/ Bundler
+    $ bundle install
 
-    bundle install
+Or install it yourself as:
 
-## USAGE
+    $ gem install image_scraper
+
+## Usage
 
 Initialize the image scraper client
 
@@ -34,7 +39,22 @@ Get the images from the url specified when you initialized the client:
 
 This will return an array of strings.
 
-## Contributing to image_scraper
+### CLI Usage
+
+```
+gem install image_scraper
+image_scraper https://unsplash.com
+```
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`. Releases are done via Github Actions.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/charlotte-ruby/image_scraper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
 
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 - Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -48,3 +68,8 @@ This will return an array of strings.
 
 Copyright (c) 2011 John McAliley. See LICENSE.txt for
 further details.
+
+## Code of Conduct
+
+Everyone interacting in the ImageScraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
+

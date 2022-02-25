@@ -2,6 +2,37 @@
 
 require 'webmock/rspec'
 require 'vcr'
+require 'image_scraper'
+
+# FIXME: remove when fixed in vcr
+# https://github.com/vcr/vcr/pull/907/files
+module VCR
+  class LibraryHooks
+    # @private
+    module WebMock
+      module_function
+
+      def with_global_hook_disabled(request)
+        global_hook_disabled_requests << request
+
+        begin
+          yield
+        ensure
+          global_hook_disabled_requests.delete(request)
+        end
+      end
+
+      def global_hook_disabled?(request)
+        requests = Thread.current[:_vcr_webmock_disabled_requests]
+        requests&.include?(request)
+      end
+
+      def global_hook_disabled_requests
+        Thread.current[:_vcr_webmock_disabled_requests] ||= []
+      end
+    end
+  end
+end
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'

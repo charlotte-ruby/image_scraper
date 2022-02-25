@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'image_scraper'
 
 describe ImageScraper::Client, :vcr do
   let(:repo_url) { "https://raw.github.com/charlotte-ruby/image_scraper" }
@@ -40,12 +39,11 @@ describe ImageScraper::Client, :vcr do
   describe '#image_urls' do
     it 'scrapes absolute paths' do
       images = [
-        'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg',
-        'http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png',
-        'http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png',
-        'http://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1',
+        'http://en.wikipedia.org/static/images/poweredby_mediawiki_88x31.png',
         'http://en.wikipedia.org/static/images/wikimedia-button.png',
-        'http://en.wikipedia.org/static/images/poweredby_mediawiki_88x31.png'
+        'http://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1',
+        'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg',
+        'http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png'
       ]
 
       url = 'http://en.wikipedia.org/wiki/Standard_test_image'
@@ -75,12 +73,11 @@ describe ImageScraper::Client, :vcr do
                                     include_css_images: false)
 
       images = [
-        '//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg',
-        '//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png',
-        '//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png',
-        '//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1',
-        '/static/images/wikimedia-button.png',
-        '/static/images/poweredby_mediawiki_88x31.png'
+        'http://en.wikipedia.org/static/images/poweredby_mediawiki_88x31.png',
+        'http://en.wikipedia.org/static/images/wikimedia-button.png',
+        'http://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1',
+        'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-220px-SIPI_Jelly_Beans_4.1.07.tiff.jpg',
+        'http://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png'
       ]
 
       expect(scraper.image_urls).to eq(images)

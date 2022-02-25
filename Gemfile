@@ -4,16 +4,16 @@ source 'http://rubygems.org'
 
 ruby File.read('.ruby-version').chomp
 
-gem 'css_parser'
-gem 'nokogiri'
-gem 'rails', '~> 6.1'
+gemspec
+
+gem 'rake', '~> 13.0'
+gem 'rspec', '~> 3.4'
+gem 'rubocop', '~> 1.21'
 
 group :development do
-  gem 'bundler', '~> 2.0'
+  gem 'bundler', '~> 2.3'
   gem 'guard-rspec', require: false
-  gem 'jeweler', '~> 2.3'
   gem 'pry'
-  gem 'rspec', '~> 3.4'
   gem 'rubocop-rspec', require: false
   gem 'test-unit'
   gem 'vcr', '~> 6.0'

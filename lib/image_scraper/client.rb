@@ -12,7 +12,9 @@ module ImageScraper
     attr_reader :uri, :error
 
     def initialize(url, options = {})
-      options.reverse_merge!(convert_to_absolute_url: true, include_css_images: true, include_css_data_images: false)
+      defaults = { convert_to_absolute_url: true, include_css_images: true, include_css_data_images: false }
+      options.merge!(defaults)
+
       @url = url
       @uri = Util.convert_to_uri(url)
 
@@ -59,7 +61,7 @@ module ImageScraper
     def image_urls
       images = page_images
       images += stylesheet_images if include_css_images
-      images
+      images.sort.uniq
     end
 
     def cleanup_src_value(text)
@@ -71,11 +73,11 @@ module ImageScraper
     end
 
     def page_images
-      return [] if doc.blank?
+      return [] if doc.to_s.empty?
 
       doc.xpath('//img').collect do |e|
         src = cleanup_src_value(e['src'])
-        next if src.blank?
+        next if src.empty?
 
         if convert_to_absolute_url
           Util.absolute_url(@uri.to_s, src)
@@ -125,7 +127,7 @@ module ImageScraper
     end
 
     def stylesheets
-      return [] if doc.blank?
+      return [] if doc.to_s.empty?
 
       doc.xpath('//link[@rel="stylesheet"]').collect do |stylesheet|
         Util.absolute_url(@uri.to_s, Util.cleanup_url(stylesheet['href']))
