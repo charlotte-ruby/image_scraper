@@ -29,7 +29,7 @@ $ gem install image_scraper
 options = {
     convert_to_absolute_url: true,
     include_css_images: true # convert any relative images to absolute urls.
-    include_css_data_images: true # convert any data images from css files (data:image/gif;base64,R0lGODlhEAAOALMAAOazToeH...)
+    include_css_data_images: true # convert any data images (data:image/gif;base64....)
 }
 
 image_scraper = ImageScraper::Client.new("http://www.rubygems.org", options)
