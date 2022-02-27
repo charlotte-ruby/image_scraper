@@ -5,7 +5,7 @@
 Simple utility that pulls image URLs from web page
 ## Installation
 
-Add this line to your application's Gemfile:
+Install in your application's Gemfile or as a standalone gem:
 
 ```ruby
 gem 'image_scraper'
@@ -13,37 +13,37 @@ gem 'image_scraper'
 
 And then execute:
 
-    $ bundle install
+```
+$ bundle install
+```
 
-Or install it yourself as:
+Standalone install:
 
-    $ gem install image_scraper
+```
+$ gem install image_scraper
+```
 
 ## Usage
 
-Initialize the image scraper client
+```ruby
+options = {
+    convert_to_absolute_url: true,
+    include_css_images: true # convert any relative images to absolute urls.
+    include_css_data_images: true # convert any data images from css files (data:image/gif;base64,R0lGODlhEAAOALMAAOazToeH...)
+}
 
-    image_scraper = ImageScraper::Client.new("http://www.rubygems.org")
+image_scraper = ImageScraper::Client.new("http://www.rubygems.org", options)
+image_scraper.image_urls
 
-You can also pass an options hash to the client when you initialize it:
+# => ["https://rubygems.org/assets/github_icon.png"", "https://rubygems.org/sponsors.png"]
+```
 
-    image_scraper = ImageScraper::Client.new("http://www.rubygems.org", options)
-    # OPTIONS - If you don't pass the option, it will default to true
-    # :convert_to_absolute_url - If there are relative image URLS, it will convert them to absolute URLS.
-    # :include_css_images - If there are stylesheets on the page, it will pull images out of the stylesheet.  For example: background: url(/images/some-image.png).
-    # :include_css_data_images - Will include data images from CSS.  For example: data:image/gif;base64,R0lGODlhEAAOALMAAOazToeH............
-
-Get the images from the url specified when you initialized the client:
-
-    image_scraper.image_urls
-
-This will return an array of strings.
-
-### CLI Usage
+### CLI
 
 ```
-gem install image_scraper
-image_scraper https://unsplash.com
+$ image_scraper https://unsplash.com | head -n 2
+https://images.unsplash.com/photo-1471897488648
+https://images.unsplash.com/photo-1590073242678
 ```
 
 ## Development
@@ -72,4 +72,3 @@ further details.
 ## Code of Conduct
 
 Everyone interacting in the ImageScraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
-
