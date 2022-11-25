@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.1.13](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.12...v0.1.13) (2022-11-25)
+
+
+### Bug Fixes
+
+* bump to gems. bump ruby to 3.1.3 ([7ee3877](https://github.com/charlotte-ruby/image_scraper/commit/7ee38775bbc0e9684fe512c698a9caa1ecb3c07b))
+
 ## [0.1.12](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.11...v0.1.12) (2022-11-25)
 
 
