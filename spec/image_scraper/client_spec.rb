@@ -21,7 +21,7 @@ describe ImageScraper::Client, :vcr do
 
       scraper = described_class.new('bogusurl4444.com')
 
-      expect(scraper.doc).to be(nil)
+      expect(scraper.doc).to be_nil
     end
 
     it 'has empty data if URL is invalid' do
