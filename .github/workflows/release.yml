@@ -11,8 +11,9 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          release-type: ruby
           package-name: "${{ env.GEM_NAME }}"
+          release-type: ruby
+          version-file: "lib/${{ env.GEM_NAME }}/version.rb"
       - uses: actions/checkout@v3
       - name: remove Gemfile.lock
         if: "${{ steps.release.outputs.release_created }}"
