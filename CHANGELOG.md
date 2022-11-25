@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.1.12](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.11...v0.1.12) (2022-11-25)
+
+
+### Bug Fixes
+
+* trying again lol ([9f55af5](https://github.com/charlotte-ruby/image_scraper/commit/9f55af55bb34d61a4a6dbf141998212229bf6ac9))
+
 ## [0.1.11](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.10...v0.1.11) (2022-11-25)
 
 
