@@ -16,10 +16,6 @@ jobs:
           release-type: ruby
           version-file: "lib/image_scraper/version.rb"
       - uses: actions/checkout@v3
-      - name: remove Gemfile.lock
-        if: "${{ steps.release.outputs.release_created }}"
-        run: |
-          rm Gemfile.lock
       - name: install ruby
         if: "${{ steps.release.outputs.release_created }}"
         uses: ruby/setup-ruby@v1
