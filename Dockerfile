@@ -1,13 +1,17 @@
-FROM ruby:3.1.0-alpine
-
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+FROM ruby:3.1-alpine
 
 WORKDIR /usr/src/app
 
-COPY .ruby-version Gemfile Gemfile.lock ./
-RUN bundle install
+RUN apk update && \
+	apk add gcc gcompat git \
+	libxml2-dev libxslt-dev \
+	make musl-dev
 
+RUN mkdir -p lib/image_scraper
+COPY lib/image_scraper/version.rb ./lib/image_scraper/version.rb
+COPY .ruby-version image_scraper.gemspec Gemfile Gemfile.lock ./
+
+RUN bundle install
 COPY . .
 
 CMD ["bundle", "exec", "rspec"]
