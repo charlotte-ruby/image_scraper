@@ -1,6 +1,5 @@
 # ImageScraper
-
-![Ruby](https://github.com/charlotte-ruby/image_scraper/workflows/ruby/badge.svg)
+[![ruby](https://github.com/charlotte-ruby/image_scraper/actions/workflows/ruby.yml/badge.svg)](https://github.com/charlotte-ruby/image_scraper/actions/workflows/ruby.yml)
 
 Simple utility that pulls image URLs from web page
 ## Installation
