@@ -13,3 +13,5 @@ COPY .ruby-version image_scraper.gemspec Gemfile Gemfile.lock ./
 
 RUN bundle install
 COPY . .
+
+CMD ["bundle", "exec", "rspec"]
