@@ -84,7 +84,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/charlo
 
 Copyright (c) 2011 John McAliley. See LICENSE.txt for
 further details.
-
-## Code of Conduct
-
-Everyone interacting in the ImageScraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
