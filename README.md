@@ -70,7 +70,7 @@ Finished in 0.54303 seconds (files took 0.95976 seconds to load)
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/charlotte-ruby/image_scraper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/charlotte-ruby/image_scraper/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are [welcome](https://github.com/charlotte-ruby/image_scraper)
 
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 - Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
