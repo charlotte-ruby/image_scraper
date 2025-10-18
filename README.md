@@ -84,3 +84,4 @@ Bug reports and pull requests are [welcome](https://github.com/charlotte-ruby/im
 
 Copyright (c) 2011 John McAliley. See LICENSE.txt for
 further details.
+
