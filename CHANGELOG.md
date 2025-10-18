@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.1.15](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.16...v0.1.15) (2025-10-18)
+
+
+### Miscellaneous Chores
+
+* release 0.1.15 ([153605a](https://github.com/charlotte-ruby/image_scraper/commit/153605a0267802d00a9df899f4427f2ca9bc2334))
+
 ## [0.1.16](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.15...v0.1.16) (2025-10-18)
 
 
