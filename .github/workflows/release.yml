@@ -2,19 +2,21 @@ name: release
 on:
   push:
     branches: [master]
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
 jobs:
   release:
     runs-on: ubuntu-latest
     env:
       GEM_NAME: image_scraper
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
-          bump-minor-pre-major: true
-          package-name: image_scraper
+          # bump-minor-pre-major: true
           release-type: ruby
-          version-file: "lib/image_scraper/version.rb"
       - uses: actions/checkout@v5
       - name: install ruby
         if: "${{ steps.release.outputs.release_created }}"
