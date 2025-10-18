@@ -1,5 +1,22 @@
 ## [Unreleased]
 
+## [0.1.15](https://github.com/charlotte-ruby/image_scraper/compare/image_scraper-v0.1.16...image_scraper/v0.1.15) (2025-10-18)
+
+
+### Bug Fixes
+
+* allow publishing of gem to rubygems and github ([f15651c](https://github.com/charlotte-ruby/image_scraper/commit/f15651cfdd3c7a0e64d37745228f8daea03fc54e))
+* attempt to bump release-please-action ([51e8572](https://github.com/charlotte-ruby/image_scraper/commit/51e85723805034a6d660f13ace63411fab756407))
+* bump ruby ([85ec180](https://github.com/charlotte-ruby/image_scraper/commit/85ec180c7ce3ef147864c2756bd82f61c5a41ad0))
+* bump to gems. bump ruby to 3.1.3 ([7ee3877](https://github.com/charlotte-ruby/image_scraper/commit/7ee38775bbc0e9684fe512c698a9caa1ecb3c07b))
+* use release-please-config.json ([1baa7d7](https://github.com/charlotte-ruby/image_scraper/commit/1baa7d7698118c3a2d5fe26a9c5c7cf24e5a99e4))
+
+
+### Miscellaneous Chores
+
+* release 0.1.10 ([f0fe5f1](https://github.com/charlotte-ruby/image_scraper/commit/f0fe5f125f414add262187ac5912ae06c4cbcf9c))
+* release 0.1.15 ([153605a](https://github.com/charlotte-ruby/image_scraper/commit/153605a0267802d00a9df899f4427f2ca9bc2334))
+
 ## [0.1.15](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.16...v0.1.15) (2025-10-18)
 
 
