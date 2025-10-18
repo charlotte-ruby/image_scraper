@@ -18,6 +18,7 @@ jobs:
         id: release
         with:
           config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
       - uses: actions/checkout@v5
       - name: install ruby
         if: "${{ steps.release.outputs.release_created }}"
