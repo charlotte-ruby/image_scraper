@@ -1,10 +1,14 @@
 {
   "packages": {
     ".": {
-      "bump-minor-pre-major": "true",
       "package-name": "image_scraper",
+      "changelog-path": "CHANGELOG.md",
       "release-type": "ruby",
-      "version-file": "lib/image_scraper/version.rb"
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "draft": false,
+      "prerelease": false
     }
-  }
+  },
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
