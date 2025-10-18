@@ -1,5 +1,32 @@
 ## [Unreleased]
 
+## [0.1.15](https://github.com/charlotte-ruby/image_scraper/compare/image_scraper-v0.1.16...image_scraper/v0.1.15) (2025-10-18)
+
+
+### Bug Fixes
+
+* allow publishing of gem to rubygems and github ([f15651c](https://github.com/charlotte-ruby/image_scraper/commit/f15651cfdd3c7a0e64d37745228f8daea03fc54e))
+* attempt to bump release-please-action ([51e8572](https://github.com/charlotte-ruby/image_scraper/commit/51e85723805034a6d660f13ace63411fab756407))
+* bump ruby ([85ec180](https://github.com/charlotte-ruby/image_scraper/commit/85ec180c7ce3ef147864c2756bd82f61c5a41ad0))
+* bump to gems. bump ruby to 3.1.3 ([7ee3877](https://github.com/charlotte-ruby/image_scraper/commit/7ee38775bbc0e9684fe512c698a9caa1ecb3c07b))
+* bump version ([936f850](https://github.com/charlotte-ruby/image_scraper/commit/936f850b0f8f3d87607d28a5f3a4a088975b2ada))
+* more release-please splunking ([9e8358e](https://github.com/charlotte-ruby/image_scraper/commit/9e8358e8253136669cb785c93d3bc00d2a72223d))
+* specify manifest ([eb2fa11](https://github.com/charlotte-ruby/image_scraper/commit/eb2fa11fc2f46392cb0f83a19839d60a8663162a))
+* test release please action ([798c64d](https://github.com/charlotte-ruby/image_scraper/commit/798c64d8e7161310c007c68918bf67a806ce6c9d))
+* test release please action ([#69](https://github.com/charlotte-ruby/image_scraper/issues/69)) ([d172896](https://github.com/charlotte-ruby/image_scraper/commit/d172896f19c1f677cd0f4d52b0e6044740587ba9))
+* test version file ([c123e61](https://github.com/charlotte-ruby/image_scraper/commit/c123e615b99a48577d0875730ca129d244ad4bda))
+* testing release please ([c722746](https://github.com/charlotte-ruby/image_scraper/commit/c72274671065e8329f879b9640a39fc5652bbbd7))
+* trying again lol ([9f55af5](https://github.com/charlotte-ruby/image_scraper/commit/9f55af55bb34d61a4a6dbf141998212229bf6ac9))
+* trying version file bumping ([4aebb94](https://github.com/charlotte-ruby/image_scraper/commit/4aebb940c7ed0ecc3a0081f96f53ab6d73f9eff0))
+* update manifest ([d23f5a4](https://github.com/charlotte-ruby/image_scraper/commit/d23f5a426afda9b9b1f476a157f465a7b288c0ae))
+* use release-please-config.json ([1baa7d7](https://github.com/charlotte-ruby/image_scraper/commit/1baa7d7698118c3a2d5fe26a9c5c7cf24e5a99e4))
+
+
+### Miscellaneous Chores
+
+* release 0.1.10 ([f0fe5f1](https://github.com/charlotte-ruby/image_scraper/commit/f0fe5f125f414add262187ac5912ae06c4cbcf9c))
+* release 0.1.15 ([153605a](https://github.com/charlotte-ruby/image_scraper/commit/153605a0267802d00a9df899f4427f2ca9bc2334))
+
 ## [0.1.15](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.16...v0.1.15) (2025-10-18)
 
 
