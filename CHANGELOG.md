@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.1.16](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.15...v0.1.16) (2025-10-18)
+
+
+### Bug Fixes
+
+* test release please action ([798c64d](https://github.com/charlotte-ruby/image_scraper/commit/798c64d8e7161310c007c68918bf67a806ce6c9d))
+
 ## [0.1.15](https://github.com/charlotte-ruby/image_scraper/compare/v0.1.14...v0.1.15) (2025-10-18)
 
 
