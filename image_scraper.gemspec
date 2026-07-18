@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'css_parser', '>= 1.11', '< 3.0'
+  spec.add_dependency 'css_parser', '>= 1.11', '< 4.0'
   spec.add_dependency 'nokogiri', '~> 1.13'
 end
